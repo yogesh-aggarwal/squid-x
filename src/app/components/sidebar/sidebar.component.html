@@ -1,9 +1,13 @@
 <div class="cmp">
   <div class="title">SquidX</div>
   <div class="options">
-    <div class="opt">Dashboard</div>
-    <div class="opt">Players</div>
-    <div class="opt">Games</div>
-    <div class="opt"></div>
+    <div
+      class="opt"
+      *ngFor="let route of routes"
+      [ngClass]="{ active: endpoint == route.slug }"
+      [routerLink]="['/', route.slug]"
+    >
+      {{ route.name }}
+    </div>
   </div>
 </div>
