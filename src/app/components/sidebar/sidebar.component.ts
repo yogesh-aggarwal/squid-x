@@ -17,6 +17,7 @@ export class SidebarComponent implements OnInit {
   routes: Routes[] = [
     { name: "Dashboard", slug: "" },
     { name: "Players", slug: "players" },
+    { name: "Workers", slug: "workers" },
     { name: "Games", slug: "games" },
     { name: "Prize", slug: "prize" },
   ];

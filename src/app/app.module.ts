@@ -9,9 +9,10 @@ import { PlayersComponent } from './routes/players/players.component';
 import { GamesComponent } from './routes/games/games.component';
 import { PrizeComponent } from './routes/prize/prize.component';
 import { TopbarComponent } from './components/topbar/topbar.component';
+import { WorkersComponent } from './routes/workers/workers.component';
 
 @NgModule({
-  declarations: [AppComponent, SidebarComponent, HomeComponent, PlayersComponent, GamesComponent, PrizeComponent, TopbarComponent],
+  declarations: [AppComponent, SidebarComponent, HomeComponent, PlayersComponent, GamesComponent, PrizeComponent, TopbarComponent, WorkersComponent],
   imports: [BrowserModule, AppRoutingModule],
   providers: [],
   bootstrap: [AppComponent],
