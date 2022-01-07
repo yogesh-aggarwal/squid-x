@@ -19,7 +19,6 @@ body {
   overflow: hidden;
 }
 
-/* width */
 ::-webkit-scrollbar {
   width: 10px;
 }
@@ -80,5 +79,26 @@ body {
     height: calc(100vh - 7rem - 6rem);
     overflow-y: scroll;
     padding: 0 2rem;
+  }
+}
+
+.input {
+  @include CenterV();
+  background: rgba($s-color, 0.7);
+  padding: 0.8rem 1rem;
+  border-radius: 0.8rem;
+  backdrop-filter: blur(10px);
+
+  i {
+    font-size: 1.1rem;
+    margin-right: 1rem;
+    margin-bottom: -1px;
+  }
+
+  input {
+    background: none;
+    border: none;
+    font-size: 0.9rem;
+    width: 20vw;
   }
 }

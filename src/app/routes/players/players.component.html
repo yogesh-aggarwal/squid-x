@@ -31,39 +31,14 @@
   </div>
   <div class="content" [ngClass]="{ 'adding-player': isCreatingPlayer }">
     <div class="add-player" [ngClass]="{ active: isCreatingPlayer }">
-      Lorem, ipsum dolor sit amet consectetur adipisicing elit. Perspiciatis
-      necessitatibus omnis natus dolores amet eaque cupiditate illum ut
-      voluptatum minima quaerat repudiandae fugiat sit nobis minus mollitia
-      accusantium sapiente adipisci, cum, quibusdam rem est totam. Placeat
-      similique impedit asperiores quia dignissimos unde, veritatis doloribus
-      quaerat a dolorum blanditiis harum praesentium laboriosam eum hic
-      voluptates cum enim eveniet, corrupti autem! Culpa rem eum laborum magni
-      dolorum at aliquid amet soluta iusto quos distinctio ipsum eius earum
-      cumque nisi, exercitationem officiis? Voluptatum molestias illum
-      reiciendis magni perspiciatis saepe iure repellat! Soluta nisi rem cum
-      facere nulla officia dolorum harum? Velit omnis provident a nisi non,
-      perferendis necessitatibus animi at repudiandae suscipit placeat dolores
-      expedita laborum quidem facilis ducimus obcaecati dolorum sint aliquam
-      laboriosam natus aliquid? Incidunt voluptatem illum cupiditate quasi ipsa
-      necessitatibus deserunt eaque aliquam, assumenda distinctio provident
-      quis. Molestias, nam ea! Harum officia labore quas sunt nemo quisquam
-      quibusdam velit alias error ratione a nesciunt expedita enim eaque
-      doloribus id, tempora quia totam veniam vero fugit ipsam cupiditate qui
-      modi. Exercitationem nobis quasi doloremque a? Illo beatae maxime ex
-      voluptates! Sit mollitia quidem praesentium nam repudiandae. Deserunt
-      provident eius autem quibusdam eaque eligendi vitae voluptatibus
-      voluptatem, quasi iusto quisquam voluptatum vero harum deleniti soluta
-      officiis magnam corrupti consequuntur tempore, odio necessitatibus
-      possimus! Cum asperiores quo vel blanditiis praesentium quos suscipit
-      eaque et cumque odit a aliquid optio itaque mollitia laborum qui saepe
-      nemo, minus, deserunt aliquam exercitationem? Delectus eligendi veritatis
-      voluptatibus quisquam aliquid, quo doloribus. Itaque exercitationem odit
-      veniam provident aut rerum cum ea, aperiam, quasi aliquam nostrum nobis
-      quaerat minus neque repudiandae ullam repellendus tenetur sit excepturi,
-      obcaecati porro necessitatibus nisi explicabo. Distinctio, corporis est
-      eius illo molestiae voluptatum dolorum quidem quae quo natus quia minima
-      facere vero officia aspernatur earum nemo dignissimos impedit accusamus,
-      aperiam eveniet exercitationem! Ex, laudantium.
+      <div class="input" (click)="name.focus()">
+      <i class="las la-search"></i>
+      <input
+        type="text"
+        placeholder="Name"
+        #name
+      />
+    </div>
     </div>
     <div class="players" [ngClass]="getClasses()">
       <div class="player" *ngFor="let player of api.players">
