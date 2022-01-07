@@ -1,6 +1,10 @@
 @import "../../../common";
 
 .screen .content {
+  &.adding-player {
+    overflow: hidden;
+  }
+
   .general-info {
     @include CenterV();
     margin-bottom: 2rem;
@@ -10,6 +14,14 @@
         font-size: 1.5rem;
         font-weight: 600;
       }
+    }
+  }
+
+  .add-player {
+    height: 0;
+
+    &.active {
+      height: 100%;
     }
   }
 

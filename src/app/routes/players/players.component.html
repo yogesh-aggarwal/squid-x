@@ -19,12 +19,18 @@
       >
         <i class="las la-th-list"></i>
       </div>
-      <div class="action" [ngClass]="{ active: true }" (click)="addPlayer()">
-        <i class="las la-plus"></i>
+      <div
+        class="action"
+        [ngClass]="{ active: true }"
+        (click)="togglePlayerCreate()"
+      >
+        <i class="las la-times" *ngIf="isCreatingPlayer"></i>
+        <i class="las la-plus" *ngIf="!isCreatingPlayer"></i>
       </div>
     </div>
   </div>
-  <div class="content">
+  <div class="content" [ngClass]="{ 'adding-player': isCreatingPlayer }">
+    <div class="add-player" [ngClass]="{ active: isCreatingPlayer }"></div>
     <div class="players" [ngClass]="getClasses()">
       <div class="player" *ngFor="let player of api.players">
         <div class="actions">

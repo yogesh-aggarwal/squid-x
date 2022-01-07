@@ -15,6 +15,7 @@ enum ViewType {
 export class PlayersComponent implements OnInit {
   viewType: ViewType = ViewType.Tile;
   viewType_t = ViewType;
+  isCreatingPlayer: boolean = false;
 
   constructor(public api: ApiService) {}
 
@@ -28,7 +29,7 @@ export class PlayersComponent implements OnInit {
     };
   }
 
-  addPlayer() {
-    
+  togglePlayerCreate() {
+    this.isCreatingPlayer = !this.isCreatingPlayer;
   }
 }
