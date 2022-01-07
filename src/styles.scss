@@ -55,6 +55,24 @@ body {
 
     .actions {
       @include CenterV();
+
+      .action {
+        @include Center();
+        @include Backdrop();
+        width: 2.7rem;
+        height: 2.7rem;
+        border-radius: 0.5rem;
+        cursor: pointer;
+        margin-left: 1rem;
+
+        &.active {
+          background: rgba($color: $s-color, $alpha: 0.6);
+        }
+
+        i {
+          font-size: 1.5rem;
+        }
+      }
     }
   }
 

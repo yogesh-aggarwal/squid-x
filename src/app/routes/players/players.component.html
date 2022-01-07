@@ -4,11 +4,24 @@
       Players
       <span class="tag">{{ api.players.length }}</span>
     </div>
-    <div class="actions">w</div>
+    <div class="actions">
+      <div class="action" (click)="viewType = viewType_t.Tile">
+        <i
+          class="las la-stream"
+          [ngClass]="{ active: viewType == viewType_t.Tile }"
+        ></i>
+      </div>
+      <div class="action" (click)="viewType = viewType_t.Table">
+        <i
+          class="las la-th-list"
+          [ngClass]="{ active: viewType == viewType_t.Table }"
+        ></i>
+      </div>
+    </div>
   </div>
   <div class="content">
-    <div class="players">
-      <div class="player tile" *ngFor="let player of api.players">
+    <div class="players" [ngClass]="getClasses()">
+      <div class="player" *ngFor="let player of api.players">
         <div class="name" [ngClass]="{ dead: !player.isDead }">
           {{ player.name }}
         </div>

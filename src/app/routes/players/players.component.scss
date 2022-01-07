@@ -14,16 +14,30 @@
   }
 
   .players {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
-    grid-gap: 1.5rem;
-
     .player {
-      &.tile {
+      transition: all 0ms;
+    }
+
+    &.table {
+      .player {
+      }
+    }
+
+    &.tile {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
+      grid-gap: 1.5rem;
+
+      .player {
         @include Backdrop();
         border-radius: 1.5rem;
         background: rgba($color: $s-color, $alpha: 0.4);
         padding: 1.5rem 1.8rem;
+
+        &:hover {
+          transition: all 250ms;
+          transform: scale(0.97);
+        }
 
         .name {
           font-size: 1.8rem;
