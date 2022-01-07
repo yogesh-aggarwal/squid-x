@@ -5,24 +5,41 @@
       <span class="tag">{{ api.players.length }}</span>
     </div>
     <div class="actions">
-      <div class="action" (click)="viewType = viewType_t.Tile">
-        <i
-          class="las la-stream"
-          [ngClass]="{ active: viewType == viewType_t.Tile }"
-        ></i>
+      <div
+        class="action"
+        [ngClass]="{ active: viewType == viewType_t.Tile }"
+        (click)="viewType = viewType_t.Tile"
+      >
+        <i class="las la-stream"></i>
       </div>
-      <div class="action" (click)="viewType = viewType_t.Table">
-        <i
-          class="las la-th-list"
-          [ngClass]="{ active: viewType == viewType_t.Table }"
-        ></i>
+      <div
+        class="action"
+        [ngClass]="{ active: viewType == viewType_t.Table }"
+        (click)="viewType = viewType_t.Table"
+      >
+        <i class="las la-th-list"></i>
+      </div>
+      <div
+        class="action"
+        [ngClass]="{ active: true }"
+        (click)="viewType = viewType_t.Table"
+      >
+        <i class="las la-plus"></i>
       </div>
     </div>
   </div>
   <div class="content">
     <div class="players" [ngClass]="getClasses()">
       <div class="player" *ngFor="let player of api.players">
-        <div class="name" [ngClass]="{ dead: !player.isDead }">
+        <div class="actions">
+          <div class="action">
+            <i class="las la-trash-alt"></i>
+          </div>
+          <div class="action" *ngIf="!player.isDead">
+            <i class="las la-user-slash"></i>
+          </div>
+        </div>
+        <div class="name" [ngClass]="{ dead: player.isDead }">
           {{ player.name }}
         </div>
         <div class="info-g1">

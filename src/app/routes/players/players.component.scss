@@ -14,8 +14,13 @@
   }
 
   .players {
+    * {
+      transition: all 0ms;
+    }
+
     .player {
       transition: all 0ms;
+      position: relative;
     }
 
     &.table {
@@ -34,9 +39,44 @@
         background: rgba($color: $s-color, $alpha: 0.4);
         padding: 1.5rem 1.8rem;
 
+        .actions {
+          position: absolute;
+          top: 0;
+          left: 0;
+          border-radius: inherit;
+          background: rgba($color: $s-color, $alpha: 0.8);
+          @include Backdrop();
+          width: 100%;
+          height: 100%;
+          pointer-events: none;
+          opacity: 0;
+          transition: all 250ms;
+
+          @include Center();
+
+          .action {
+            @include Center();
+            width: 3.5rem;
+            height: 3.5rem;
+            background: $s-color;
+            border-radius: 0.5rem;
+            cursor: pointer;
+            margin: 0 0.25rem;
+
+            i {
+              font-size: 1.6rem;
+            }
+          }
+        }
+
         &:hover {
           transition: all 250ms;
           transform: scale(0.97);
+
+          .actions {
+            opacity: 1;
+            pointer-events: all;
+          }
         }
 
         .name {
