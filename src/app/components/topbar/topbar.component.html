@@ -1,5 +1,14 @@
 <div class="cmp">
-  <div class="title">
-    Dashboard
+  <div class="title">Dashboard</div>
+
+  <div class="tools">
+    <div class="search" (click)="searchInput.focus()">
+      <i class="las la-search"></i>
+      <input
+        type="text"
+        placeholder="Search player, worker, games etc..."
+        #searchInput
+      />
+    </div>
   </div>
 </div>
