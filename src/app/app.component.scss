@@ -1,6 +1,6 @@
 #root {
   display: grid;
-  // grid-template-columns: 18rem auto;
+  grid-template-rows: 5rem auto;
   background: rgb(97, 97, 97);
 
   * {
@@ -15,14 +15,14 @@
     top: 0;
     left: 0;
     pointer-events: none;
+    opacity: 0;
   }
 
   main {
     z-index: 1;
-    height: 100vh;
-
+    height: calc(100vh - 5rem);
     display: grid;
-    grid-template-rows: 5rem auto;
+    grid-template-columns: 25rem auto;
 
     .content {
       height: calc(100vh - 5rem);
