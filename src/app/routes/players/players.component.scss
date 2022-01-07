@@ -1,0 +1,66 @@
+@import "../../../common";
+
+.screen .content {
+  .general-info {
+    @include CenterV();
+    margin-bottom: 2rem;
+
+    span {
+      &.total-players {
+        font-size: 1.5rem;
+        font-weight: 600;
+      }
+    }
+  }
+
+  .players {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
+    grid-gap: 1.5rem;
+
+    .player {
+      &.tile {
+        @include Backdrop();
+        border-radius: 1.5rem;
+        background: rgba($color: $s-color, $alpha: 0.4);
+        padding: 1.5rem 1.8rem;
+
+        .name {
+          font-size: 1.8rem;
+          font-size: 600;
+          margin-bottom: 0.5rem;
+
+          &.dead {
+            text-decoration: line-through;
+          }
+        }
+
+        .info-g1 {
+          @include CenterV();
+          margin-bottom: 1.8rem;
+          justify-content: space-between;
+
+          .dob,
+          .occupation {
+            color: rgba($color: $t-color, $alpha: 0.5);
+          }
+        }
+
+        .info-g2 {
+          @include CenterV();
+          justify-content: space-between;
+
+          .debt,
+          .games-passed {
+            font-weight: 500;
+            color: rgba($color: $t-color, $alpha: 0.75);
+          }
+
+          .games-passed {
+            color: rgba($color: $t-color, $alpha: 0.5);
+          }
+        }
+      }
+    }
+  }
+}

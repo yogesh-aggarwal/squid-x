@@ -35,12 +35,22 @@ body {
   .top {
     @include CenterV();
     justify-content: space-between;
-    height: 5rem;
+    height: 6rem;
     padding: 0 3rem;
 
     .title {
+      @include CenterV();
       font-size: 1.8rem;
       font-weight: 500;
+
+      span.tag {
+        margin-left: 0.7rem;
+        margin-top: 3px;
+        padding: 0.3rem 1rem;
+        background: $s-color;
+        border-radius: 1rem;
+        font-size: 0.8rem;
+      }
     }
 
     .actions {
@@ -49,7 +59,7 @@ body {
   }
 
   .content {
-    height: calc(100vh - 7rem - 5rem);
+    height: calc(100vh - 7rem - 6rem);
     overflow-y: scroll;
     padding: 0 2rem;
   }

@@ -1,6 +1,25 @@
 <div class="screen">
   <div class="top">
-    <div class="title">Players</div>
+    <div class="title">
+      Players
+      <span class="tag">{{ api.players.length }}</span>
+    </div>
   </div>
-  <div class="content">lorem4000</div>
+  <div class="content">
+    <div class="players">
+      <div class="player tile" *ngFor="let player of api.players">
+        <div class="name" [ngClass]="{ dead: !player.isDead }">
+          {{ player.name }}
+        </div>
+        <div class="info-g1">
+          <div class="dob">{{ player.dob | date: "dd/MM/yyyy" }}</div>
+          <div class="occupation">{{ player.occupation }}</div>
+        </div>
+        <div class="info-g2">
+          <div class="debt">${{ player.debt }}</div>
+          <div class="games-passed">{{ player.atGameNumber }} Games</div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>

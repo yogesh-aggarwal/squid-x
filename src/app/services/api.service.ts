@@ -4,7 +4,7 @@ import { Apollo, gql } from "apollo-angular";
 export type Player = {
   id: number;
   name: string;
-  dob: number;
+  dob: Date;
   occupation: string;
   address: string;
   debt: number;
@@ -15,7 +15,7 @@ export type Player = {
 export type Worker = {
   id: number;
   name: string;
-  dob: number;
+  dob: Date;
   occupation: string;
   address: string;
   duty: "Manager" | "Guard" | "Utility";
