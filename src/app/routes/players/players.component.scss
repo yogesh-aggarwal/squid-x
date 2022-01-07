@@ -32,6 +32,7 @@
 
           &.dead {
             text-decoration: line-through;
+            color: rgba($color: $t-color, $alpha: 0.4);
           }
         }
 
