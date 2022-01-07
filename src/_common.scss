@@ -17,3 +17,7 @@ $t-color: #ffffff;
   display: flex;
   justify-content: center;
 }
+
+@mixin Backdrop {
+  backdrop-filter: blur(40px) brightness(50%);
+}

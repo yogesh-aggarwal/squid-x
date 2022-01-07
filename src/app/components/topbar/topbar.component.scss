@@ -4,8 +4,9 @@
   @include CenterV();
   justify-content: space-between;
   height: 5rem;
-  backdrop-filter: brightness(50%);
   padding: 0 2rem;
+
+  @include Backdrop();
 
   .title {
     font-size: 1.8rem;
