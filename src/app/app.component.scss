@@ -1,6 +1,7 @@
 #root {
   display: grid;
   grid-template-columns: 18rem auto;
+  background: rgb(97, 97, 97);
 
   img {
     width: 100vw;
@@ -10,6 +11,8 @@
     top: 0;
     left: 0;
     filter: blur(40px) contrast(1.1);
+    pointer-events: none;
+    opacity: 0;
   }
 
   main {
