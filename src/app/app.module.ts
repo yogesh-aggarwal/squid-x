@@ -11,6 +11,7 @@ import { GamesComponent } from "./routes/games/games.component";
 import { PrizeComponent } from "./routes/prize/prize.component";
 import { TopbarComponent } from "./components/topbar/topbar.component";
 import { WorkersComponent } from "./routes/workers/workers.component";
+import { GraphQLModule } from './graphql.module';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,7 @@ import { WorkersComponent } from "./routes/workers/workers.component";
     TopbarComponent,
     WorkersComponent,
   ],
-  imports: [BrowserModule, AppRoutingModule, HttpClientModule],
+  imports: [BrowserModule, AppRoutingModule, HttpClientModule, GraphQLModule],
   providers: [],
   bootstrap: [AppComponent],
 })
