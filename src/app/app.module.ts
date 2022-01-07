@@ -8,9 +8,10 @@ import { HomeComponent } from './routes/home/home.component';
 import { PlayersComponent } from './routes/players/players.component';
 import { GamesComponent } from './routes/games/games.component';
 import { PrizeComponent } from './routes/prize/prize.component';
+import { TopbarComponent } from './components/topbar/topbar.component';
 
 @NgModule({
-  declarations: [AppComponent, SidebarComponent, HomeComponent, PlayersComponent, GamesComponent, PrizeComponent],
+  declarations: [AppComponent, SidebarComponent, HomeComponent, PlayersComponent, GamesComponent, PrizeComponent, TopbarComponent],
   imports: [BrowserModule, AppRoutingModule],
   providers: [],
   bootstrap: [AppComponent],

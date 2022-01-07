@@ -18,7 +18,16 @@
   }
 
   main {
-    height: 100vh;
     z-index: 1;
+    height: 100vh;
+    padding: 0 1rem;
+
+    display: grid;
+    grid-template-rows: 5rem auto;
+
+    .content {
+      height: calc(100vh - 5rem);
+      overflow-y: auto;
+    }
   }
 }
