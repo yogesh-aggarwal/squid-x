@@ -2,6 +2,7 @@
 
 .screen .content {
   &.adding-player {
+    padding-right: 2.5rem;
     overflow: hidden;
   }
 
@@ -19,9 +20,15 @@
 
   .add-player {
     height: 0;
+    opacity: 0;
+    pointer-events: none;
+    transform: scale(0.9) translateY(25%);
 
     &.active {
       height: 100%;
+      opacity: 1;
+      pointer-events: all;
+      transform: scale(1);
     }
   }
 
