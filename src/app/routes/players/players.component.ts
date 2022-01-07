@@ -27,4 +27,8 @@ export class PlayersComponent implements OnInit {
       table: this.viewType == ViewType.Table,
     };
   }
+
+  addPlayer() {
+    
+  }
 }
