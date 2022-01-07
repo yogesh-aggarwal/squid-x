@@ -1,0 +1,18 @@
+#root {
+  display: grid;
+  grid-template-columns: 18rem auto;
+
+  img {
+    width: 100vw;
+    height: 100vh;
+    object-fit: cover;
+    position: absolute;
+    top: 0;
+    left: 0;
+    filter: blur(40px) contrast(1.1);
+  }
+
+  main {
+    height: 100vh;
+  }
+}

@@ -1,0 +1,19 @@
+$p-color: #0075ff;
+$s-color: #1e2129;
+$t-color: #ffffff;
+
+@mixin Center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@mixin CenterV {
+  display: flex;
+  align-items: center;
+}
+
+@mixin CenterH {
+  display: flex;
+  justify-content: center;
+}
