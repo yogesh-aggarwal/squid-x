@@ -1,6 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { NavigationEnd, Router } from "@angular/router";
-import { ApiService } from "src/app/services/api.service";
+import { Apollo, gql } from "apollo-angular";
 
 type Routes = {
   name: string;
@@ -23,7 +23,7 @@ export class SidebarComponent implements OnInit {
     { name: "Prize", slug: "prize" },
   ];
 
-  constructor(private router: Router, private api: ApiService) {}
+  constructor(private router: Router) {}
 
   ngOnInit(): void {
     this.router.events.subscribe((event) => {
