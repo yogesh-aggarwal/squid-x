@@ -1,5 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { NavigationEnd, Router } from "@angular/router";
+import { ApiService } from "src/app/services/api.service";
 
 type Routes = {
   name: string;
@@ -22,7 +23,7 @@ export class SidebarComponent implements OnInit {
     { name: "Prize", slug: "prize" },
   ];
 
-  constructor(private router: Router) {}
+  constructor(private router: Router, private api: ApiService) {}
 
   ngOnInit(): void {
     this.router.events.subscribe((event) => {
