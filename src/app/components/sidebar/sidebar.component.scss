@@ -7,8 +7,7 @@
   .title {
     font-size: 1.6rem;
     font-weight: 500;
-    @include Center();
-    border-bottom: 2px solid $s-color;
+    @include Center();S
   }
 
   .options {
