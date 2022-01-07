@@ -1,0 +1,11 @@
+@import "../../../common";
+
+.cmp {
+  @include CenterV();
+  height: 5rem;
+
+  .title {
+    font-size: 1.8rem;
+    font-weight: 500;
+  }
+}
