@@ -1,4 +1,5 @@
 import { Component, OnInit } from "@angular/core";
+import { Player } from "src/app/services/api.service";
 import { DataService } from "src/app/services/data.service";
 
 @Component({
@@ -7,7 +8,10 @@ import { DataService } from "src/app/services/data.service";
   styleUrls: ["./prize.component.scss"],
 })
 export class PrizeComponent implements OnInit {
+  winner?: Player;
   constructor(public dataService: DataService) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.dataService.winner.subscribe((winner) => (this.winner = winner));
+  }
 }

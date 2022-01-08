@@ -7,4 +7,63 @@
     font-size: 1.5rem;
     font-weight: 500;
   }
+
+  .winner {
+    display: grid;
+    grid-template-columns: 30rem auto;
+    height: 85%;
+
+    .about {
+      display: grid;
+      grid-template-rows: 10rem auto;
+      padding: 0 2rem;
+
+      .title {
+        font-size: 1.5rem;
+        font-weight: 600;
+        @include Center();
+      }
+
+      .info {
+        .block {
+          @include CenterV();
+          span {
+            font-size: 1.5rem;
+
+            &.heading {
+              color: rgba($color: $t-color, $alpha: 0.6);
+              width: 10rem;
+              font-size: 1.3rem;
+            }
+          }
+        }
+      }
+    }
+
+    .prizing {
+      @include Center();
+      flex-direction: column;
+
+      span {
+        font-size: 2.8rem;
+        font-weight: 600;
+      }
+
+      .actions {
+        @include CenterV();
+        margin-top: 3rem;
+
+        .action {
+          background: $p-color;
+          border-radius: 0.5rem;
+          padding: 0.8rem 1.8rem;
+          cursor: pointer;
+
+          &:hover {
+            transform: scale(1.05);
+          }
+        }
+      }
+    }
+  }
 }

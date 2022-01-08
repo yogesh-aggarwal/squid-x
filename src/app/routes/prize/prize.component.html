@@ -1,10 +1,39 @@
 <div class="screen">
   <div class="top">
-    <div class="title">Prize</div>
+    <div class="title">Prize Winner</div>
   </div>
   <div class="content">
-    <div class="no-winner" *ngIf="!(dataService.winner | async)">
+    <div class="no-winner" *ngIf="!winner">
       Winner is yet to be announced. Cross Your fingers!
+    </div>
+    <div class="winner" *ngIf="winner">
+      <div class="about">
+        <div class="title">{{ winner.name }}</div>
+        <div class="info">
+          <div class="block">
+            <span class="heading">Date of birth</span>
+            <span>{{ winner.dob | date: "MM/dd/YYYY" }}</span>
+          </div>
+          <div class="block">
+            <span class="heading">Occupation</span>
+            <span>{{ winner.occupation }}</span>
+          </div>
+          <div class="block">
+            <span class="heading">Address</span>
+            <span>{{ winner.address }}</span>
+          </div>
+          <div class="block">
+            <span class="heading">Debt</span>
+            <span>{{ winner.debt }}</span>
+          </div>
+        </div>
+      </div>
+      <div class="prizing">
+        <span>{{ winner.name }} WON $1000 PRIZE!!</span>
+        <div class="actions">
+          <div class="action">Transfer Money</div>
+        </div>
+      </div>
     </div>
   </div>
 </div>
