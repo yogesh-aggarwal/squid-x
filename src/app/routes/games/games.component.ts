@@ -17,7 +17,11 @@ export class GamesComponent implements OnInit {
       if (!games.length) return;
       for (const game of games) {
         if (!game.hasCovered) {
-          this.nextGameNo = game.gameNo;
+          if (this.nextGameNo == -1 && game.gameNo == 6) {
+            this.nextGameNo = -1;
+          } else {
+            this.nextGameNo = game.gameNo;
+          }
           break;
         }
       }
