@@ -7,15 +7,6 @@
     <div class="actions">
       <div
         class="action"
-        style="margin-right: 2rem"
-        (click)="nextGame()"
-        routerLink="/games"
-      >
-        <i class="las la-hand-scissors"></i>
-        <span>Next Game</span>
-      </div>
-      <div
-        class="action"
         [ngClass]="{ active: viewType == viewType_t.Tile }"
         (click)="viewType = viewType_t.Tile"
       >

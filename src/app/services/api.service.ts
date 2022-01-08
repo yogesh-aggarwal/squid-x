@@ -194,9 +194,6 @@ export class ApiService {
               dob
               occupation
               address
-              debt
-              atGameNumber
-              isDead
             }
           }
         `,

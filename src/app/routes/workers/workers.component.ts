@@ -52,10 +52,6 @@ export class WorkersComponent implements OnInit {
     return `${num < 10 ? "0" : ""}${num}`;
   }
 
-  nextGame() {
-    this.api.moveToNextGame();
-  }
-
   editWorker(id: number) {
     if (
       !this.name ||
