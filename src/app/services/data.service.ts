@@ -4,8 +4,8 @@ import { BehaviorSubject } from "rxjs";
 @Injectable({
   providedIn: "root",
 })
-export class PlayersService {
-  doShowDead = new BehaviorSubject<boolean>(false);
+export class DataService {
+  doShowDeadPlayers = new BehaviorSubject<boolean>(false);
 
   constructor() {}
 }

@@ -30,9 +30,11 @@
       </div>
       <div
         class="action"
-        [ngClass]="{ active: playersService.doShowDead.value }"
+        [ngClass]="{ active: dataService.doShowDeadPlayers.value }"
         (click)="
-          playersService.doShowDead.next(!playersService.doShowDead.value)
+          dataService.doShowDeadPlayers.next(
+            !dataService.doShowDeadPlayers.value
+          )
         "
       >
         <i class="las la-skull-crossbones"></i>
@@ -113,7 +115,7 @@
         <div
           #parent
           class="player"
-          *ngIf="!(player.isDead && !playersService.doShowDead.value)"
+          *ngIf="!(player.isDead && !dataService.doShowDeadPlayers.value)"
         >
           <div class="name" [ngClass]="{ dead: player.isDead }">
             {{ player.name }}

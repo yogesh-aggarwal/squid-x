@@ -1,6 +1,6 @@
 import { Component, ElementRef, OnInit, ViewChild } from "@angular/core";
 import { ApiService, Player } from "src/app/services/api.service";
-import { PlayersService } from "src/app/services/players.service";
+import { DataService } from "src/app/services/data.service";
 
 enum ViewType {
   Tile = "tile",
@@ -32,7 +32,7 @@ export class PlayersComponent implements OnInit {
 
   isUpdating: boolean = false;
 
-  constructor(public api: ApiService, public playersService: PlayersService) {}
+  constructor(public api: ApiService, public dataService: DataService) {}
 
   ngOnInit(): void {}
 
@@ -42,7 +42,7 @@ export class PlayersComponent implements OnInit {
 
   getPlayersLength(obj: Object): number {
     return Object.values(obj).filter(
-      (player) => !(player.isDead && !this.playersService.doShowDead.value)
+      (player) => !(player.isDead && !this.dataService.doShowDeadPlayers.value)
     ).length;
   }
 
