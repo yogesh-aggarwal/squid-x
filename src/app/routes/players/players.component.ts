@@ -155,7 +155,6 @@ export class PlayersComponent implements OnInit {
   }
 
   eliminatePlayer($parent: HTMLDivElement, id: number) {
-    console.log(id);
     $parent.style.opacity = ".2";
     setTimeout(() => {
       this.api.updatePlayer(id, {

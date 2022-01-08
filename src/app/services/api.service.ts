@@ -2,6 +2,9 @@ import { Injectable } from "@angular/core";
 import { Apollo, gql } from "apollo-angular";
 import { BehaviorSubject } from "rxjs";
 
+declare module "file-saver";
+import { saveAs } from "file-saver";
+
 export type Player = {
   id: number;
   name: string;
@@ -28,6 +31,13 @@ export type Game = {
   name: string;
   description: string;
   hasCovered: boolean;
+};
+
+export type Report = {
+  [key: number]: {
+    players: Player[];
+    workers: Worker[];
+  };
 };
 
 @Injectable({
@@ -243,6 +253,65 @@ export class ApiService {
       })
       .subscribe(({ data }) => {
         this.games.next(data["moveToNextGame"]);
+      });
+  }
+
+  generateReport() {
+    this.apollo
+      .watchQuery<any>({
+        query: gql`
+          query {
+            getReport
+          }
+        `,
+      })
+      .valueChanges.subscribe(({ data }) => {
+        data = data["getReport"] as Report;
+
+        const players: Player[] = data[0].players;
+        const workers: Worker[] = data[0].workers;
+
+        // -- Player report --------
+        let playersReport: { [key: number]: any[] } = {};
+        players.forEach((player, index) => {
+          playersReport[index] = [
+            player.id,
+            player.name,
+            "x",
+            "",
+            "",
+            "",
+            "",
+            "",
+          ];
+        });
+        Object.values(data).forEach((game: any, index: number) => {
+          game.players.forEach((player: Player, playerIndex: number) => {
+            playersReport[playerIndex][index + 2] = !player.isDead ? "x" : "";
+          });
+        });
+
+        let winnerFound: boolean = false;
+        let records: any[][] = Object.values(playersReport);
+        records.map((record) => {
+          if (winnerFound) return;
+          if (record[7] == "x") {
+            record[1] += " (Winner)";
+            winnerFound = true;
+          }
+        });
+
+        let csvFileContent = "";
+        csvFileContent += "ID,Name,Game 1,Game 2,Game 3,Game 4,Game 5,Game 6\n";
+        records.forEach(
+          (record) => (csvFileContent += `${record.toString()}\n`)
+        );
+        saveAs(
+          new Blob([csvFileContent], {
+            type: "text/plain;charset=utf-8",
+          }),
+          "PlayersReport.csv"
+        );
       });
   }
 }
