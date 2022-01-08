@@ -268,6 +268,8 @@ export class ApiService {
       .valueChanges.subscribe(({ data }) => {
         data = data["getReport"] as Report;
 
+        if (Object.keys(data).length == 0) return;
+
         const players: Player[] = data[0].players;
         const workers: Worker[] = data[0].workers;
 
