@@ -38,7 +38,7 @@
         </div>
         <div class="description">{{ game.description.slice(0, 350) }}...</div>
         <div class="actions">
-          <div class="action">Stats</div>
+          <div class="action" *ngIf="game.gameNo < nextGameNo">Stats</div>
         </div>
       </div>
     </div>
