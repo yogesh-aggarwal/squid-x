@@ -115,7 +115,7 @@
             <div class="debt">${{ player.debt }}</div>
             <div class="games-passed">{{ player.atGameNumber }} Games</div>
           </div>
-          <div class="is-dead">
+          <div class="is-dead" (click)="eliminatePlayer(parent, player.id)">
             <i class="las la-skull-crossbones" *ngIf="player.isDead"></i>
           </div>
           <div class="actions">
