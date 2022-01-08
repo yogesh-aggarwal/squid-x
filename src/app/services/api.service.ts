@@ -192,6 +192,7 @@ export class ApiService {
               id
               name
               dob
+              duty
               occupation
               address
             }

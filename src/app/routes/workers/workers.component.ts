@@ -18,6 +18,8 @@ export class WorkersComponent implements OnInit {
   occupation?: ElementRef<HTMLElement>;
   @ViewChild("dob")
   dob?: ElementRef<HTMLElement>;
+  @ViewChild("duty")
+  duty?: ElementRef<HTMLElement>;
   @ViewChild("address")
   address?: ElementRef<HTMLElement>;
 
@@ -52,17 +54,21 @@ export class WorkersComponent implements OnInit {
     return `${num < 10 ? "0" : ""}${num}`;
   }
 
+  selectRole(duty: HTMLDivElement, $event: MouseEvent) {
+    duty.innerText = ($event.target as any).innerText;
+  }
+
   editWorker(id: number) {
-    if (!this.name || !this.occupation || !this.dob || !this.address) return;
     this.isUpdating = true;
     this.currentEditingWorkerID = id;
     const workerMeta = this.api.workers[id];
     const workerDob = new Date(workerMeta.dob);
-    (this.name.nativeElement as any).value = workerMeta.name;
-    (this.occupation.nativeElement as any).value = workerMeta.occupation;
-    (this.address.nativeElement as any).value = workerMeta.address;
+    (this.name?.nativeElement as any).value = workerMeta.name;
+    (this.occupation?.nativeElement as any).value = workerMeta.occupation;
+    (this.duty?.nativeElement as any).value = workerMeta.duty;
+    (this.address?.nativeElement as any).value = workerMeta.address;
     (
-      this.dob.nativeElement as any
+      this.dob?.nativeElement as any
     ).value = `${workerDob.getFullYear()}-${this.parse2DigitInt(
       workerDob.getMonth() + 1
     )}-${this.parse2DigitInt(workerDob.getDay() + 1)}`;
@@ -70,24 +76,24 @@ export class WorkersComponent implements OnInit {
   }
 
   updateWorker() {
-    if (!this.name || !this.occupation || !this.dob || !this.address) return;
     let newWorker: Partial<Worker> = {
-      name: (this.name.nativeElement as any).value,
-      occupation: (this.occupation.nativeElement as any).value,
-      dob: new Date((this.dob.nativeElement as any).value).toDateString(),
-      address: (this.address.nativeElement as any).value,
+      name: (this.name?.nativeElement as any).value,
+      occupation: (this.occupation?.nativeElement as any).value,
+      dob: new Date((this.dob?.nativeElement as any).value).toDateString(),
+      duty: (this.duty?.nativeElement as any).innerText,
+      address: (this.address?.nativeElement as any).value,
     };
     this.api.updateWorker(this.currentEditingWorkerID, newWorker);
     this.closeAddScreen();
   }
 
   createWorker() {
-    if (!this.name || !this.occupation || !this.dob || !this.address) return;
     this.api.createWorker({
-      name: (this.name.nativeElement as any).value,
-      occupation: (this.occupation.nativeElement as any).value,
-      dob: new Date((this.dob.nativeElement as any).value).toDateString(),
-      address: (this.address.nativeElement as any).value,
+      name: (this.name?.nativeElement as any).value,
+      occupation: (this.occupation?.nativeElement as any).value,
+      dob: new Date((this.dob?.nativeElement as any).value).toDateString(),
+      duty: (this.duty?.nativeElement as any).innerText,
+      address: (this.address?.nativeElement as any).value,
     });
     this.closeAddScreen();
   }

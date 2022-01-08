@@ -58,13 +58,13 @@
           <div class="dropdown">
             <div class="main">
               <i class="las la-dove"></i>
-              <div class="name">Role</div>
+              <div class="name" #duty>Guard</div>
               <i class="las la-angle-down indicate"></i>
             </div>
             <div class="drop-content">
-              <div class="item">Guard</div>
-              <div class="item">Manager</div>
-              <div class="item">Utility</div>
+              <div class="item" (click)="selectRole(duty, $event)">Guard</div>
+              <div class="item" (click)="selectRole(duty, $event)">Manager</div>
+              <div class="item" (click)="selectRole(duty, $event)">Utility</div>
             </div>
           </div>
         </div>
