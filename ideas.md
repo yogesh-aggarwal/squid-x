@@ -1,6 +1,10 @@
 - Squid cursor
-- Grid & tile view
-- Background music
 - Changing Background
-- Moving Squids
-- 
+
+# Pending
+
+- Stats for every game
+- Prize
+- Search
+- Dashboard
+- Prize Payment
