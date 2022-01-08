@@ -5,7 +5,12 @@
       <span class="tag">{{ getPlayersLength(api.players) }}</span>
     </div>
     <div class="actions">
-      <div class="action" style="margin-right: 2rem" routerLink="/games">
+      <div
+        class="action"
+        style="margin-right: 2rem"
+        (click)="nextGame()"
+        routerLink="/games"
+      >
         <i class="las la-hand-scissors"></i>
         <span>Next Game</span>
       </div>

@@ -157,4 +157,24 @@ export class ApiService {
         delete this.players[id];
       });
   }
+
+  moveToNextGame() {
+    this.apollo
+      .mutate<any>({
+        mutation: gql`
+          mutation {
+            moveToNextGame {
+              uuid
+              gameNo
+              name
+              description
+              hasCovered
+            }
+          }
+        `,
+      })
+      .subscribe(({ data }) => {
+        this.games.next(data["moveToNextGame"]);
+      });
+  }
 }

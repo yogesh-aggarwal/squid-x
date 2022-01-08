@@ -57,6 +57,10 @@ export class PlayersComponent implements OnInit {
     return `${num < 10 ? "0" : ""}${num}`;
   }
 
+  nextGame() {
+    this.api.moveToNextGame();
+  }
+
   editPlayer(id: number) {
     if (
       !this.name ||
