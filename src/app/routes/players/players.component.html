@@ -2,9 +2,16 @@
   <div class="top">
     <div class="title">
       Players
-      <span class="tag">{{ getObjectKeysLength(api.players) }}</span>
+      <span class="tag">{{ getPlayersLength(api.players) }}</span>
     </div>
     <div class="actions">
+      <div
+        class="action"
+        [ngClass]="{ active: doShowDead }"
+        (click)="doShowDead = !doShowDead"
+      >
+        <i class="las la-skull-crossbones"></i>
+      </div>
       <div
         class="action"
         [ngClass]="{ active: viewType == viewType_t.Tile }"
@@ -76,38 +83,38 @@
       </div>
     </div>
     <div class="players" [ngClass]="getClasses()">
-      <div
-        #parent
-        class="player"
+      <ng-container
         *ngFor="let player of getObjectValues(api.players) | orderBy: 'name'"
       >
-        <div class="actions">
-          <div class="action" (click)="editPlayer(player.id)">
-            <i class="las la-pencil-alt"></i>
+        <div #parent class="player" *ngIf="player.isDead == doShowDead">
+          <div class="actions">
+            <div class="action" (click)="editPlayer(player.id)">
+              <i class="las la-pencil-alt"></i>
+            </div>
+            <div class="action" (click)="deletePlayer(parent, player.id)">
+              <i class="las la-trash-alt"></i>
+            </div>
+            <div
+              class="action"
+              (click)="eliminatePlayer(parent, player.id)"
+              *ngIf="!player.isDead"
+            >
+              <i class="las la-skull-crossbones"></i>
+            </div>
           </div>
-          <div class="action" (click)="deletePlayer(parent, player.id)">
-            <i class="las la-trash-alt"></i>
+          <div class="name" [ngClass]="{ dead: player.isDead }">
+            {{ player.name }}
           </div>
-          <div
-            class="action"
-            (click)="eliminatePlayer(parent, player.id)"
-            *ngIf="!player.isDead"
-          >
-            <i class="las la-skull-crossbones"></i>
+          <div class="info-g1">
+            <div class="dob">{{ player.dob | date: "dd/MM/yyyy" }}</div>
+            <div class="occupation">{{ player.occupation }}</div>
+          </div>
+          <div class="info-g2">
+            <div class="debt">${{ player.debt }}</div>
+            <div class="games-passed">{{ player.atGameNumber }} Games</div>
           </div>
         </div>
-        <div class="name" [ngClass]="{ dead: player.isDead }">
-          {{ player.name }}
-        </div>
-        <div class="info-g1">
-          <div class="dob">{{ player.dob | date: "dd/MM/yyyy" }}</div>
-          <div class="occupation">{{ player.occupation }}</div>
-        </div>
-        <div class="info-g2">
-          <div class="debt">${{ player.debt }}</div>
-          <div class="games-passed">{{ player.atGameNumber }} Games</div>
-        </div>
-      </div>
+      </ng-container>
     </div>
   </div>
 </div>

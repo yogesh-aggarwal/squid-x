@@ -31,6 +31,7 @@ export class PlayersComponent implements OnInit {
   currentEditingPlayerID: number = -1;
 
   isUpdating: boolean = false;
+  doShowDead: boolean = true;
 
   constructor(public api: ApiService) {}
 
@@ -40,8 +41,10 @@ export class PlayersComponent implements OnInit {
     return Object.values(obj);
   }
 
-  getObjectKeysLength(obj: Object): number {
-    return Object.keys(obj).length;
+  getPlayersLength(obj: Object): number {
+    return Object.values(obj).filter(
+      (player) => player.isDead == this.doShowDead
+    ).length;
   }
 
   getClasses() {
