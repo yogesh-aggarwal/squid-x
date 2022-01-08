@@ -75,10 +75,12 @@ export class ApiService {
       .valueChanges.subscribe(({ data }) => {
         let players = data["getAllPlayers"];
         players.forEach((player: Player) => {
+          player = (({ __typename, ...o }) => o)(player as any);
           this.players[player.id] = player;
         });
         let workers = data["getAllWorkers"];
         workers.forEach((worker: Worker) => {
+          worker = (({ __typename, ...o }) => o)(worker as any);
           this.workers[worker.id] = worker;
         });
         this.games = Object.assign([], data["getAllGames"]);
@@ -110,6 +112,7 @@ export class ApiService {
   }
 
   updatePlayer(id: number, player: Partial<Player>) {
+    delete player.id;
     this.apollo
       .mutate<any>({
         mutation: gql`
@@ -149,8 +152,8 @@ export class ApiService {
           id: id,
         },
       })
-      .subscribe(({ data }) => {
-        delete this.players[data.id];
+      .subscribe((_) => {
+        delete this.players[id];
       });
   }
 }

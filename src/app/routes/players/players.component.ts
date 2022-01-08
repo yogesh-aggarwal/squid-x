@@ -142,7 +142,21 @@ export class PlayersComponent implements OnInit {
     this.isUpdating = false;
   }
 
-  deletePlayer(id: number) {
-    this.api.deletePlayer(id);
+  deletePlayer($parent: HTMLDivElement, id: number) {
+    $parent.style.transform = "scale(0)";
+    setTimeout(() => {
+      this.api.deletePlayer(id);
+    }, 230);
+  }
+
+  eliminatePlayer($parent: HTMLDivElement, id: number) {
+    $parent.style.opacity = ".2";
+    setTimeout(() => {
+      this.api.updatePlayer(id, {
+        ...this.api.players[id],
+        isDead: true,
+      });
+      $parent.style.opacity = "1";
+    }, 230);
   }
 }
