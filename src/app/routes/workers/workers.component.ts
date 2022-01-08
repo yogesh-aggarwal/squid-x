@@ -25,7 +25,7 @@ export class WorkersComponent implements OnInit {
 
   viewType: ViewType = ViewType.Table;
   viewType_t = ViewType;
-  isCreatingWorker: boolean = true;
+  isCreatingWorker: boolean = false;
 
   currentEditingWorkerID: number = -1;
 
