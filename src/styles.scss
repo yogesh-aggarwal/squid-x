@@ -115,8 +115,6 @@ body {
   height: 3.25rem;
   cursor: pointer;
 
-  margin-top: 1rem;
-
   &:hover {
     .drop-content {
       opacity: 1;
@@ -146,6 +144,7 @@ body {
 
   &:hover {
     height: unset;
+    border-radius: 0.8rem 0.8rem 0 0;
 
     i.indicate {
       transform: rotate(-180deg);
@@ -163,6 +162,13 @@ body {
     pointer-events: none;
     height: 0;
     transition: all 0ms;
+    position: absolute;
+    top: 3.25rem;
+    left: 0;
+    width: 100%;
+    background: rgba($s-color, 0.7);
+    border-radius: 0 0 0.8rem 0.8rem;
+    backdrop-filter: blur(10px);
 
     .item {
       padding: 0.6rem 1.5rem;
