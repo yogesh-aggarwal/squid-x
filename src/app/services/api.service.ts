@@ -25,12 +25,18 @@ export type Worker = {
   duty: "Manager" | "Guard" | "Utility";
 };
 
+export type Bet = {
+  vipID: number;
+  playerID: number;
+  amount: number;
+};
 export type Game = {
   uuid: string;
   gameNo: number;
   name: string;
   description: string;
   hasCovered: boolean;
+  bets: Bet[];
 };
 
 export type Report = {
@@ -79,6 +85,11 @@ export class ApiService {
               name
               description
               hasCovered
+              bets {
+                vipID
+                playerID
+                amount
+              }
             }
           }
         `,
@@ -247,6 +258,11 @@ export class ApiService {
               name
               description
               hasCovered
+              bets {
+                vipID
+                playerID
+                amount
+              }
             }
           }
         `,
