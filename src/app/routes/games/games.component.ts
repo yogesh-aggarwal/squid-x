@@ -1,5 +1,5 @@
 import { Component, OnInit } from "@angular/core";
-import { ApiService, Game } from "src/app/services/api.service";
+import { ApiService, Game, Report } from "src/app/services/api.service";
 import { DataService, UserType } from "src/app/services/data.service";
 
 @Component({
@@ -18,8 +18,13 @@ export class GamesComponent implements OnInit {
   constructor(public api: ApiService, public dataService: DataService) {}
 
   decideWinner() {
-    this.api.generateReport((report) => {
-      console.log(report);
+    this.api.generateReport((report: Report) => {
+      for (let player of report[5].players) {
+        if (!player.isDead) {
+          this.dataService.winner.next(player);
+          break;
+        }
+      }
     });
   }
 
