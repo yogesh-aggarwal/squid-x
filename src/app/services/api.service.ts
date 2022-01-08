@@ -108,6 +108,7 @@ export class ApiService {
           this.workers[worker.id] = worker;
         });
         let games = cloneDeep(data)["getAllGames"];
+        this.games.next([]);
         games.map((game: Game) => {
           game = (({ __typename, ...o }) => o)(game as any);
           this.games.next([...this.games.value, game]);
@@ -271,6 +272,10 @@ export class ApiService {
       })
       .subscribe(({ data }) => {
         this.games.next(data["moveToNextGame"]);
+        Object.values(this.players).forEach((player) => {
+          if (!player.isDead) player.atGameNumber++;
+          this.players[player.id] = player;
+        });
         if (callback) callback();
       });
   }
