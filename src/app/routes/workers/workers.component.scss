@@ -43,9 +43,9 @@
     }
 
     .form {
-      .c2 {
+      .c3 {
         display: grid;
-        grid-template-columns: 1fr 1fr;
+        grid-template-columns: 1fr 1fr 1fr;
         grid-gap: 1rem;
         margin-bottom: 1rem;
       }
@@ -73,7 +73,7 @@
     }
   }
 
-  $table-layout: 0.5fr 1.5fr 1.5fr 0.5fr 0.5fr;
+  $table-layout: 0.5fr 1.5fr 1.5fr 0.5fr;
 
   .table-header {
     display: grid;
@@ -128,8 +128,7 @@
           }
         }
 
-        .info-g1,
-        .info-g2 {
+        .info-g1 {
           display: grid;
           align-items: center;
           grid-template-columns: 1fr 1fr;
@@ -138,7 +137,6 @@
             text-align: center;
           }
         }
-
         .actions {
           @include Center();
 

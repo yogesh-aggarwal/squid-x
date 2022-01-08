@@ -16,8 +16,6 @@ export class WorkersComponent implements OnInit {
   name?: ElementRef<HTMLElement>;
   @ViewChild("occupation")
   occupation?: ElementRef<HTMLElement>;
-  @ViewChild("debt")
-  debt?: ElementRef<HTMLElement>;
   @ViewChild("dob")
   dob?: ElementRef<HTMLElement>;
   @ViewChild("address")
@@ -62,7 +60,6 @@ export class WorkersComponent implements OnInit {
     if (
       !this.name ||
       !this.occupation ||
-      !this.debt ||
       !this.dob ||
       !this.address
     )
@@ -86,7 +83,6 @@ export class WorkersComponent implements OnInit {
     if (
       !this.name ||
       !this.occupation ||
-      !this.debt ||
       !this.dob ||
       !this.address
     )
@@ -105,7 +101,6 @@ export class WorkersComponent implements OnInit {
     if (
       !this.name ||
       !this.occupation ||
-      !this.debt ||
       !this.dob ||
       !this.address
     )
@@ -123,14 +118,12 @@ export class WorkersComponent implements OnInit {
     if (
       !this.name ||
       !this.occupation ||
-      !this.debt ||
       !this.dob ||
       !this.address
     )
       return;
     (this.name.nativeElement as any).value = "";
     (this.occupation.nativeElement as any).value = "";
-    (this.debt.nativeElement as any).value = "";
     (this.address.nativeElement as any).value = "";
     (this.dob.nativeElement as any).value = "";
     this.isCreatingWorker = false;
