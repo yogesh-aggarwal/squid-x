@@ -25,8 +25,10 @@
       </div>
       <div
         class="action"
-        [ngClass]="{ active: doShowDead }"
-        (click)="doShowDead = !doShowDead"
+        [ngClass]="{ active: playersService.doShowDead.value }"
+        (click)="
+          playersService.doShowDead.next(!playersService.doShowDead.value)
+        "
       >
         <i class="las la-skull-crossbones"></i>
       </div>
@@ -103,7 +105,11 @@
       <ng-container
         *ngFor="let player of getObjectValues(api.players) | orderBy: 'name'"
       >
-        <div #parent class="player" *ngIf="!(player.isDead && !doShowDead)">
+        <div
+          #parent
+          class="player"
+          *ngIf="!(player.isDead && !playersService.doShowDead.value)"
+        >
           <div class="name" [ngClass]="{ dead: player.isDead }">
             {{ player.name }}
           </div>

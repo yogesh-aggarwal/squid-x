@@ -6,9 +6,14 @@
         <i class="las la-chart-pie"></i>
         <span>Results</span>
       </div>
-      <div class="action" *ngIf="nextGameNo != -1">
+      <div
+        class="action"
+        *ngIf="nextGameNo != -1"
+        (click)="playersService.doShowDead.next(false)"
+        routerLink="/players"
+      >
         <i class="las la-forward"></i>
-        <span>Start Next Game</span>
+        <span>Start Game</span>
       </div>
     </div>
   </div>
