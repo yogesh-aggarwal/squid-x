@@ -38,7 +38,6 @@ export class GamesComponent implements OnInit {
           break;
         }
       }
-      this.showGameAbout(1);
     });
   }
 
