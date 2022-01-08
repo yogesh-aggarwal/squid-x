@@ -68,7 +68,6 @@ export class PlayersComponent implements OnInit {
     this.isUpdating = true;
     this.currentEditingPlayerID = id;
     const playerMeta = this.api.players[id];
-    console.log(this.api.players);
     const playerDob = new Date(playerMeta.dob);
     (this.name.nativeElement as any).value = playerMeta.name;
     (this.occupation.nativeElement as any).value = playerMeta.occupation;

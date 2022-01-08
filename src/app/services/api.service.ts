@@ -132,7 +132,8 @@ export class ApiService {
         },
       })
       .subscribe(({ data }) => {
-        this.players[data.id] = data["updatePlayer"] as Player;
+        data = data["updatePlayer"] as Player;
+        this.players[data.id] = data;
       });
   }
 
