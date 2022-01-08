@@ -22,7 +22,9 @@
       <div
         class="action"
         [ngClass]="{ active: true }"
-        (click)="togglePlayerCreate()"
+        (click)="
+          isCreatingPlayer ? closeAddScreen() : (isCreatingPlayer = true)
+        "
       >
         <i class="las la-times" *ngIf="isCreatingPlayer"></i>
         <i class="las la-plus" *ngIf="!isCreatingPlayer"></i>
@@ -31,23 +33,59 @@
   </div>
   <div class="content" [ngClass]="{ 'adding-player': isCreatingPlayer }">
     <div class="add-player" [ngClass]="{ active: isCreatingPlayer }">
-      <div class="input" (click)="name.focus()">
-      <i class="las la-search"></i>
-      <input
-        type="text"
-        placeholder="Name"
-        #name
-      />
-    </div>
+      <div class="heading" *ngIf="isUpdating">Update player</div>
+      <div class="heading" *ngIf="!isUpdating">Add new player</div>
+      <div class="form">
+        <div class="c2">
+          <div class="input" (click)="name.focus()">
+            <i class="las la-signature"></i>
+            <input type="text" placeholder="Name" #name />
+          </div>
+          <div class="input" (click)="occupation.focus()">
+            <i class="las la-user-md"></i>
+            <input type="text" placeholder="Occupation" #occupation />
+          </div>
+        </div>
+        <div class="c2">
+          <div class="input" (click)="debt.focus()">
+            <i class="las la-dollar-sign"></i>
+            <input type="number" placeholder="Debt" #debt />
+          </div>
+          <div class="input" (click)="dob.focus()">
+            <i class="las la-calendar-alt"></i>
+            <input type="date" placeholder="Address" #dob />
+          </div>
+        </div>
+        <div class="input" (click)="address.focus()">
+          <i class="las la-igloo"></i>
+          <input type="text" placeholder="Address" #address />
+        </div>
+      </div>
+      <div class="actions">
+        <div class="action" (click)="closeAddScreen()">Cancel</div>
+        <div class="action primary" (click)="updatePlayer()" *ngIf="isUpdating">
+          Update
+        </div>
+        <div
+          class="action primary"
+          (click)="createPlayer()"
+          *ngIf="!isUpdating"
+        >
+          Add
+        </div>
+      </div>
     </div>
     <div class="players" [ngClass]="getClasses()">
-      <div class="player" *ngFor="let player of api.players">
+      <div class="player" *ngFor="let player of api.players | orderBy: 'name'">
         <div class="actions">
+          <div class="action" (click)="editPlayer(player.id)">
+            <i class="las la-pencil-alt"></i>
+          </div>
           <div class="action">
             <i class="las la-trash-alt"></i>
           </div>
           <div class="action" *ngIf="!player.isDead">
-            <i class="las la-user-slash"></i>
+            <i class="las la-skull-crossbones"></i>
           </div>
         </div>
         <div class="name" [ngClass]="{ dead: player.isDead }">

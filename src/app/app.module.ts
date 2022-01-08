@@ -11,7 +11,8 @@ import { GamesComponent } from "./routes/games/games.component";
 import { PrizeComponent } from "./routes/prize/prize.component";
 import { TopbarComponent } from "./components/topbar/topbar.component";
 import { WorkersComponent } from "./routes/workers/workers.component";
-import { GraphQLModule } from './graphql.module';
+import { GraphQLModule } from "./graphql.module";
+import { OrderModule } from "ngx-order-pipe";
 
 @NgModule({
   declarations: [
@@ -24,7 +25,13 @@ import { GraphQLModule } from './graphql.module';
     TopbarComponent,
     WorkersComponent,
   ],
-  imports: [BrowserModule, AppRoutingModule, HttpClientModule, GraphQLModule],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    HttpClientModule,
+    GraphQLModule,
+    OrderModule,
+  ],
   providers: [],
   bootstrap: [AppComponent],
 })

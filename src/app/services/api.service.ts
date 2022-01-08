@@ -4,7 +4,7 @@ import { Apollo, gql } from "apollo-angular";
 export type Player = {
   id: number;
   name: string;
-  dob: Date;
+  dob: string;
   occupation: string;
   address: string;
   debt: number;
@@ -15,7 +15,7 @@ export type Player = {
 export type Worker = {
   id: number;
   name: string;
-  dob: Date;
+  dob: string;
   occupation: string;
   address: string;
   duty: "Manager" | "Guard" | "Utility";
@@ -73,9 +73,62 @@ export class ApiService {
         `,
       })
       .valueChanges.subscribe(({ data }) => {
-        this.players = data["getAllPlayers"];
-        this.workers = data["getAllWorkers"];
-        this.games = data["getAllGames"];
+        this.players = Object.assign([], data["getAllPlayers"]);
+        this.workers = Object.assign([], data["getAllWorkers"]);
+        this.games = Object.assign([], data["getAllGames"]);
+      });
+  }
+
+  createPlayer(player: Partial<Player>) {
+    this.apollo
+      .mutate<any>({
+        mutation: gql`
+          mutation ($player: PlayerCreateInput) {
+            createPlayer(player: $player) {
+              id
+            }
+          }
+        `,
+        variables: {
+          player: player,
+        },
+      })
+      .subscribe(({ data }) => {
+        data = data["createPlayer"];
+        const newPlayer = {
+          ...player,
+          id: data.id,
+        } as Player;
+        this.players.push(newPlayer);
+      });
+  }
+
+  updatePlayer(id: number, player: Partial<Player>) {
+    this.apollo
+      .mutate<any>({
+        mutation: gql`
+          mutation ($id: Int, $player: PlayerUpdateInput) {
+            updatePlayer(id: $id, player: $player) {
+              id
+              name
+              dob
+              occupation
+              address
+              debt
+              atGameNumber
+              isDead
+            }
+          }
+        `,
+        variables: {
+          id: id,
+          player: player,
+        },
+      })
+      .subscribe(({ data }) => {
+        data = data["updatePlayer"];
+        const newPlayer = data as Player;
+        this.players[data.id - 1] = newPlayer;
       });
   }
 }

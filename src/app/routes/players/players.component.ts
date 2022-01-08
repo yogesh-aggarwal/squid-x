@@ -1,5 +1,5 @@
-import { Component, OnInit } from "@angular/core";
-import { ApiService } from "src/app/services/api.service";
+import { Component, ElementRef, OnInit, ViewChild } from "@angular/core";
+import { ApiService, Player } from "src/app/services/api.service";
 
 enum ViewType {
   List = "list",
@@ -13,9 +13,24 @@ enum ViewType {
   styleUrls: ["./players.component.scss"],
 })
 export class PlayersComponent implements OnInit {
+  @ViewChild("name")
+  name?: ElementRef<HTMLElement>;
+  @ViewChild("occupation")
+  occupation?: ElementRef<HTMLElement>;
+  @ViewChild("debt")
+  debt?: ElementRef<HTMLElement>;
+  @ViewChild("dob")
+  dob?: ElementRef<HTMLElement>;
+  @ViewChild("address")
+  address?: ElementRef<HTMLElement>;
+
   viewType: ViewType = ViewType.Tile;
   viewType_t = ViewType;
-  isCreatingPlayer: boolean = true;
+  isCreatingPlayer: boolean = false;
+
+  currentEditingPlayerID: number = -1;
+
+  isUpdating: boolean = false;
 
   constructor(public api: ApiService) {}
 
@@ -29,7 +44,96 @@ export class PlayersComponent implements OnInit {
     };
   }
 
-  togglePlayerCreate() {
-    this.isCreatingPlayer = !this.isCreatingPlayer;
+  parse2DigitInt(num: number): string {
+    return `${num < 10 ? "0" : ""}${num}`;
+  }
+
+  editPlayer(id: number) {
+    if (
+      !this.name ||
+      !this.occupation ||
+      !this.debt ||
+      !this.dob ||
+      !this.address
+    )
+      return;
+    this.isUpdating = true;
+    this.currentEditingPlayerID = id;
+    const playerMeta = this.api.players[id - 1];
+
+    const playerDob = new Date(playerMeta.dob);
+    console.log(playerDob);
+
+    (this.name.nativeElement as any).value = playerMeta.name;
+    (this.occupation.nativeElement as any).value = playerMeta.occupation;
+    (this.debt.nativeElement as any).value = playerMeta.debt;
+    (this.address.nativeElement as any).value = playerMeta.address;
+    (
+      this.dob.nativeElement as any
+    ).value = `${playerDob.getFullYear()}-${this.parse2DigitInt(
+      playerDob.getMonth() + 1
+    )}-${this.parse2DigitInt(playerDob.getDay() + 1)}`;
+    this.isCreatingPlayer = true;
+  }
+
+  updatePlayer() {
+    if (
+      !this.name ||
+      !this.occupation ||
+      !this.debt ||
+      !this.dob ||
+      !this.address
+    )
+      return;
+    let newPlayer: Partial<Player> = {
+      name: (this.name.nativeElement as any).value,
+      occupation: (this.occupation.nativeElement as any).value,
+      debt: parseFloat((this.debt.nativeElement as any).value),
+      dob: new Date((this.dob.nativeElement as any).value).toDateString(),
+      address: (this.address.nativeElement as any).value,
+      isDead: false,
+      atGameNumber: 1,
+    };
+    this.api.updatePlayer(this.currentEditingPlayerID, newPlayer);
+    this.closeAddScreen();
+  }
+
+  createPlayer() {
+    if (
+      !this.name ||
+      !this.occupation ||
+      !this.debt ||
+      !this.dob ||
+      !this.address
+    )
+      return;
+    this.api.createPlayer({
+      name: (this.name.nativeElement as any).value,
+      occupation: (this.occupation.nativeElement as any).value,
+      debt: parseFloat((this.debt.nativeElement as any).value),
+      dob: new Date((this.dob.nativeElement as any).value).toDateString(),
+      address: (this.address.nativeElement as any).value,
+      atGameNumber: 1,
+      isDead: false,
+    });
+    this.closeAddScreen();
+  }
+
+  closeAddScreen() {
+    if (
+      !this.name ||
+      !this.occupation ||
+      !this.debt ||
+      !this.dob ||
+      !this.address
+    )
+      return;
+    (this.name.nativeElement as any).value = "";
+    (this.occupation.nativeElement as any).value = "";
+    (this.debt.nativeElement as any).value = "";
+    (this.address.nativeElement as any).value = "";
+    (this.dob.nativeElement as any).value = "";
+    this.isCreatingPlayer = false;
+    this.isUpdating = false;
   }
 }
