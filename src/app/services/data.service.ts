@@ -22,7 +22,7 @@ export class DataService {
   currentHighlightID = new BehaviorSubject<number>(-1);
   user = new BehaviorSubject<User | undefined>({
     id: 1,
-    type: UserType.FrontMan,
+    type: UserType.VIP,
     name: "VIPs",
   });
 

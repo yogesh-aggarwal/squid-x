@@ -198,7 +198,10 @@
             class="actions"
             *ngIf="(dataService.user | async)?.type == UserType.VIP"
           >
-            <i class="las la-check" *ngIf="getBetAmount(player)"></i>
+            <i
+              class="las la-check"
+              *ngIf="getBetAmount(player) && getBetAmount(player) != 0"
+            ></i>
           </div>
         </div>
       </ng-container>
