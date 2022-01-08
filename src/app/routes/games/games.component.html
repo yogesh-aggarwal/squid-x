@@ -19,10 +19,20 @@
   </div>
   <div class="content" [ngClass]="{ active: doShowFullReport }">
     <div class="full-report">
-      <div class="report"></div>
-      <div class="actions">
-        <div class="action" (click)="closeGameStats()">Close</div>
-      </div>
+      <ng-container *ngIf="doShowAbout">
+        <div class="about">
+          <div class="title">{{ currentGame?.name }}</div>
+        </div>
+        <div class="actions">
+          <div class="action" (click)="closeGameStats()">Close</div>
+        </div>
+      </ng-container>
+      <ng-container *ngIf="!doShowAbout">
+        <div class="report"></div>
+        <div class="actions">
+          <div class="action" (click)="closeGameStats()">Close</div>
+        </div>
+      </ng-container>
     </div>
     <div class="games">
       <div
@@ -46,6 +56,13 @@
         <div class="actions">
           <div
             class="action"
+            style="margin-left: 1rem"
+            (click)="showGameAbout(game.gameNo)"
+          >
+            About
+          </div>
+          <div
+            class="action primary"
             *ngIf="game.gameNo < nextGameNo || nextGameNo == -1"
             (click)="showGameStats(game.gameNo)"
           >

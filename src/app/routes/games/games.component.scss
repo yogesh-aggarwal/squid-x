@@ -13,6 +13,19 @@
     display: grid;
     grid-template-rows: auto 5rem;
 
+    .report {
+      display: grid;
+      grid-template-columns: 25rem auto;
+      height: 100%;
+
+      .about-game {
+        .title {
+          font-size: 1.3rem;
+          font-weight: 600;
+        }
+      }
+    }
+
     .actions {
       @include CenterV();
       justify-content: flex-end;
@@ -66,10 +79,14 @@
         justify-content: flex-end;
 
         .action {
-          padding: 0.5rem 1.5rem;
-          background: rgba($color: $p-color, $alpha: 0.7);
+          padding: 0.5rem 2rem;
           border-radius: 0.5rem;
           cursor: pointer;
+
+          &.primary {
+            padding: 0.5rem 1.5rem;
+            background: rgba($color: $p-color, $alpha: 0.7);
+          }
         }
       }
 
