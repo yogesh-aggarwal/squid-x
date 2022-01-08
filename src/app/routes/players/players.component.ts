@@ -24,7 +24,7 @@ export class PlayersComponent implements OnInit {
   @ViewChild("address")
   address?: ElementRef<HTMLElement>;
 
-  viewType: ViewType = ViewType.Tile;
+  viewType: ViewType = ViewType.Table;
   viewType_t = ViewType;
   isCreatingPlayer: boolean = false;
 
