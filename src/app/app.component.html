@@ -1,11 +1,13 @@
-<audio src="../assets/music.mp3" autoplay loop></audio>
 <div id="root">
   <img src="../assets/bg - Copy.jpg" alt="" />
   <app-topbar></app-topbar>
-  <main>
+  <main class="user" *ngIf="dataService.user | async">
     <app-sidebar></app-sidebar>
     <div class="content">
       <router-outlet></router-outlet>
     </div>
+  </main>
+  <main class="no-user" *ngIf="!(dataService.user | async)">
+    <app-login></app-login>
   </main>
 </div>

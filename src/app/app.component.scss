@@ -22,18 +22,25 @@
 
   main {
     height: calc(100vh - 5rem);
-    display: grid;
-    grid-template-columns: 25rem auto;
 
-    .content {
-      margin: 1rem;
-      margin-left: 0;
-      height: calc(100vh - 7rem);
-      overflow-y: auto;
-      border-radius: 2rem;
+    &.user {
+      display: grid;
+      grid-template-columns: 25rem auto;
 
-      @include Backdrop();
-      // border-top-left-radius: 2rem;
+      .content {
+        margin: 1rem;
+        margin-left: 0;
+        height: calc(100vh - 7rem);
+        overflow-y: auto;
+        border-radius: 2rem;
+
+        @include Backdrop();
+        // border-top-left-radius: 2rem;
+      }
+    }
+
+    &.no-user {
+      @include Center();
     }
   }
 }

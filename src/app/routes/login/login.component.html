@@ -1,1 +1,13 @@
-
+<div class="login">
+  <div class="wrapper">
+    <div class="input" (click)="username.focus()">
+      <i class="las la-user"></i>
+      <input type="text" placeholder="Username" #username />
+    </div>
+    <div class="input" (click)="password.focus()">
+      <i class="las la-key"></i>
+      <input type="text" placeholder="Password" #password />
+    </div>
+    <div class="button" (click)="login()">Login</div>
+  </div>
+</div>

@@ -1,0 +1,27 @@
+@import "../../../common";
+
+.login {
+  @include Center();
+  height: 100%;
+
+  .wrapper {
+    width: 30vw;
+    padding: 3rem;
+
+    border-radius: 1rem;
+    @include Backdrop();
+
+    .input {
+      margin-bottom: 1rem;
+    }
+
+    .button {
+      margin-top: 4rem;
+      padding: 0.8rem;
+      text-align: center;
+      background: rgba($color: $p-color, $alpha: 0.8);
+      border-radius: 0.5rem;
+      cursor: pointer;
+    }
+  }
+}
