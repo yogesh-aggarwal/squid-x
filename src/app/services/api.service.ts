@@ -2,6 +2,8 @@ import { Injectable } from "@angular/core";
 import { Apollo, gql } from "apollo-angular";
 import { BehaviorSubject } from "rxjs";
 
+import { cloneDeep } from "lodash";
+
 declare module "file-saver";
 import { saveAs } from "file-saver";
 
@@ -26,9 +28,12 @@ export type Worker = {
 };
 
 export type Bet = {
-  vipID: number;
-  playerID: number;
-  amount: number;
+  // PlayerID : Amount
+  [key: number]: number;
+};
+export type Bets = {
+  // UserID : Bet
+  [key: string]: Bet;
 };
 export type Game = {
   uuid: string;
@@ -36,7 +41,7 @@ export type Game = {
   name: string;
   description: string;
   hasCovered: boolean;
-  bets: Bet[];
+  bets: Bets;
 };
 
 export type Report = {
@@ -85,27 +90,27 @@ export class ApiService {
               name
               description
               hasCovered
-              bets {
-                vipID
-                playerID
-                amount
-              }
+              bets
             }
           }
         `,
       })
       .valueChanges.subscribe(({ data }) => {
-        let players = data["getAllPlayers"];
+        let players = cloneDeep(data)["getAllPlayers"];
         players.forEach((player: Player) => {
           player = (({ __typename, ...o }) => o)(player as any);
           this.players[player.id] = player;
         });
-        let workers = data["getAllWorkers"];
+        let workers = cloneDeep(data)["getAllWorkers"];
         workers.forEach((worker: Worker) => {
           worker = (({ __typename, ...o }) => o)(worker as any);
           this.workers[worker.id] = worker;
         });
-        this.games.next(Object.assign([], data["getAllGames"]));
+        let games = cloneDeep(data)["getAllGames"];
+        games.map((game: Game) => {
+          game = (({ __typename, ...o }) => o)(game as any);
+          this.games.next([...this.games.value, game]);
+        });
       });
   }
 
@@ -258,17 +263,33 @@ export class ApiService {
               name
               description
               hasCovered
-              bets {
-                vipID
-                playerID
-                amount
-              }
+              bets
             }
           }
         `,
       })
       .subscribe(({ data }) => {
         this.games.next(data["moveToNextGame"]);
+        if (callback) callback();
+      });
+  }
+
+  updateGameBets(id: number, bets: Bets, callback?: Function) {
+    this.apollo
+      .mutate<any>({
+        mutation: gql`
+          mutation ($id: Int!, $bets: JSON) {
+            updateGameBets(id: $id, bets: $bets) {
+              uuid
+            }
+          }
+        `,
+        variables: {
+          id: id,
+          bets: bets,
+        },
+      })
+      .subscribe((_) => {
         if (callback) callback();
       });
   }

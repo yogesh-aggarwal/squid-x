@@ -161,11 +161,13 @@
               (dataService.user | async)?.type == UserType.VIP && !player.isDead
             "
           >
-            <div class="input" (click)="searchInput.focus()">
+            <div class="input" (click)="input.focus()">
               <input
                 type="number"
-                placeholder="Amount (0 if not)"
-                #searchInput
+                placeholder="Amount"
+                [defaultValue]="getBetAmount(player)"
+                (input)="updateBetAmount($event, player)"
+                #input
               />
             </div>
           </div>
@@ -196,7 +198,7 @@
             class="actions"
             *ngIf="(dataService.user | async)?.type == UserType.VIP"
           >
-            <i class="las la-check"></i>
+            <i class="las la-check" *ngIf="getBetAmount(player)"></i>
           </div>
         </div>
       </ng-container>

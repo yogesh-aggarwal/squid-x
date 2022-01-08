@@ -1,5 +1,6 @@
 import { Component, ElementRef, OnInit, ViewChild } from "@angular/core";
-import { ApiService, Player } from "src/app/services/api.service";
+import { BehaviorSubject, Observable, Subject } from "rxjs";
+import { ApiService, Game, Player } from "src/app/services/api.service";
 import { DataService, UserType } from "src/app/services/data.service";
 
 enum ViewType {
@@ -61,6 +62,41 @@ export class PlayersComponent implements OnInit {
 
   nextGame() {
     this.api.moveToNextGame();
+  }
+
+  getBetAmount(player: Player): number {
+    let games = this.api.games.value;
+    if (!games) return 0;
+    const userID = this.dataService.user.value?.id;
+    if (!userID) return 0;
+
+    let game =
+      games[
+        this.api.games.value.filter((game) => !game.hasCovered)[0].gameNo - 1
+      ];
+    const vipBets = game.bets[userID];
+    if (!vipBets) return 0;
+    const amount = vipBets[player.id];
+    return amount;
+  }
+
+  updateBetAmount($event: Event, player: Player) {
+    const userID = this.dataService.user.value?.id;
+    if (!userID) return;
+
+    const finalAmount = ($event.target as any).value;
+    let games: Game[] = this.api.games.value;
+    let game =
+      games[
+        this.api.games.value.filter((game) => !game.hasCovered)[0].gameNo - 1
+      ];
+
+    if (!game.bets[userID]) game.bets[userID] = {};
+    game.bets[userID][player.id] = finalAmount;
+    this.api.updateGameBets(game.gameNo, game.bets);
+    console.log("dwdw");
+
+    this.api.games.next(games);
   }
 
   editPlayer(id: number) {
