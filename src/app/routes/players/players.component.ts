@@ -1,6 +1,6 @@
 import { Component, ElementRef, OnInit, ViewChild } from "@angular/core";
 import { ApiService, Player } from "src/app/services/api.service";
-import { DataService } from "src/app/services/data.service";
+import { DataService, UserType } from "src/app/services/data.service";
 
 enum ViewType {
   Tile = "tile",
@@ -31,6 +31,8 @@ export class PlayersComponent implements OnInit {
   currentEditingPlayerID: number = -1;
 
   isUpdating: boolean = false;
+
+  UserType = UserType;
 
   constructor(public api: ApiService, public dataService: DataService) {}
 

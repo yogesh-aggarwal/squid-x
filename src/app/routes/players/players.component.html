@@ -10,6 +10,7 @@
         style="margin-right: 2rem"
         (click)="nextGame()"
         routerLink="/games"
+        *ngIf="(dataService.user | async)?.type == UserType.FrontMan"
       >
         <i class="las la-hand-scissors"></i>
         <span>Next Game</span>
@@ -42,6 +43,7 @@
       <div
         class="action"
         [ngClass]="{ active: true }"
+        *ngIf="(dataService.user | async)?.type == UserType.FrontMan"
         (click)="
           isCreatingPlayer ? closeAddScreen() : (isCreatingPlayer = true)
         "
@@ -105,8 +107,24 @@
         <div class="g3">Debt (in $)</div>
         <div class="g3">Games Passed</div>
       </div>
-      <div class="g4">Eliminated</div>
-      <div class="g5">Actions</div>
+      <div
+        class="g4"
+        *ngIf="(dataService.user | async)?.type == UserType.FrontMan"
+      >
+        Eliminated
+      </div>
+      <div class="g5" *ngIf="(dataService.user | async)?.type == UserType.VIP">
+        Bet (in $)
+      </div>
+      <div
+        class="g5"
+        *ngIf="(dataService.user | async)?.type == UserType.FrontMan"
+      >
+        Actions
+      </div>
+      <div class="g4" *ngIf="(dataService.user | async)?.type == UserType.VIP">
+        Bet Staus
+      </div>
     </div>
     <div class="players" [ngClass]="getClasses()">
       <ng-container
@@ -131,12 +149,35 @@
           <div
             class="is-dead"
             [ngClass]="{ dead: player.isDead }"
+            *ngIf="(dataService.user | async)?.type == UserType.FrontMan"
             (click)="eliminatePlayer(parent, player.id)"
           >
             <span *ngIf="!player.isDead">Eliminate</span>
             <i class="las la-skull-crossbones" *ngIf="player.isDead"></i>
           </div>
-          <div class="actions">
+          <div
+            class="actions"
+            *ngIf="
+              (dataService.user | async)?.type == UserType.VIP && !player.isDead
+            "
+          >
+            <div class="input" (click)="searchInput.focus()">
+              <input
+                type="number"
+                placeholder="Amount (0 if not)"
+                #searchInput
+              />
+            </div>
+          </div>
+          <div
+            *ngIf="
+              (dataService.user | async)?.type == UserType.VIP && player.isDead
+            "
+          ></div>
+          <div
+            class="actions"
+            *ngIf="(dataService.user | async)?.type == UserType.FrontMan"
+          >
             <div class="action" (click)="editPlayer(player.id)">
               <i class="las la-pencil-alt"></i>
             </div>
@@ -150,6 +191,12 @@
             >
               <i class="las la-skull-crossbones"></i>
             </div>
+          </div>
+          <div
+            class="actions"
+            *ngIf="(dataService.user | async)?.type == UserType.VIP"
+          >
+            <i class="las la-check"></i>
           </div>
         </div>
       </ng-container>
