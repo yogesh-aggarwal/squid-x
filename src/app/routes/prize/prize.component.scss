@@ -1,0 +1,10 @@
+@import "../../../common";
+
+.screen .content {
+  .no-winner {
+    @include Center();
+    height: 85%;
+    font-size: 1.5rem;
+    font-weight: 500;
+  }
+}
