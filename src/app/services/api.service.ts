@@ -236,7 +236,7 @@ export class ApiService {
       });
   }
 
-  moveToNextGame() {
+  moveToNextGame(callback?: Function) {
     this.apollo
       .mutate<any>({
         mutation: gql`
@@ -253,10 +253,11 @@ export class ApiService {
       })
       .subscribe(({ data }) => {
         this.games.next(data["moveToNextGame"]);
+        if (callback) callback();
       });
   }
 
-  generateReport() {
+  generateReport(callback: (report: Report) => void, doSave?: boolean) {
     this.apollo
       .watchQuery<any>({
         query: gql`
@@ -268,7 +269,10 @@ export class ApiService {
       .valueChanges.subscribe(({ data }) => {
         data = data["getReport"] as Report;
 
+        callback(data);
+
         if (Object.keys(data).length == 0) return;
+        if (!doSave) return;
 
         const players: Player[] = data[0].players;
         const workers: Worker[] = data[0].workers;

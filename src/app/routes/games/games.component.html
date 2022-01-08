@@ -17,7 +17,13 @@
       </div>
     </div>
   </div>
-  <div class="content">
+  <div class="content" [ngClass]="{ active: doShowFullReport }">
+    <div class="full-report">
+      <div class="report"></div>
+      <div class="actions">
+        <div class="action" (click)="closeGameStats()">Close</div>
+      </div>
+    </div>
     <div class="games">
       <div
         class="game"
@@ -38,7 +44,13 @@
         </div>
         <div class="description">{{ game.description.slice(0, 350) }}...</div>
         <div class="actions">
-          <div class="action" *ngIf="game.gameNo < nextGameNo">Stats</div>
+          <div
+            class="action"
+            *ngIf="game.gameNo < nextGameNo || nextGameNo == -1"
+            (click)="showGameStats(game.gameNo)"
+          >
+            Stats
+          </div>
         </div>
       </div>
     </div>
