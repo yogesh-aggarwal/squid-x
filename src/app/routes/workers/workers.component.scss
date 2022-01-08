@@ -139,27 +139,6 @@
           }
         }
 
-        .is-dead {
-          @include Center();
-          width: 100%;
-          height: 100%;
-          cursor: pointer;
-          background: rgba($color: $s-color, $alpha: 0.5);
-          border-radius: 0.5rem;
-
-          &.dead {
-            background: transparent;
-          }
-
-          i {
-            font-size: 1.4rem;
-          }
-
-          span {
-            font-size: 0.9rem;
-          }
-        }
-
         .actions {
           @include Center();
 
@@ -173,10 +152,6 @@
 
             &:hover {
               background: $s-color;
-            }
-
-            &.dead {
-              display: none;
             }
 
             i {
@@ -240,19 +215,10 @@
           }
         }
 
-        .is-dead {
-          display: none;
-        }
-
         .name {
           font-size: 1.8rem;
           font-size: 600;
           margin-bottom: 0.5rem;
-
-          &.dead {
-            text-decoration: line-through;
-            color: rgba($color: $t-color, $alpha: 0.4);
-          }
         }
 
         .info-g1 {
