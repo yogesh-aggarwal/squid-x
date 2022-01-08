@@ -13,16 +13,20 @@
     display: grid;
     grid-template-rows: auto 5rem;
 
-    .report {
+    .about {
       display: grid;
-      grid-template-columns: 25rem auto;
+      grid-template-rows: auto auto;
+      align-items: center;
       height: 100%;
 
-      .about-game {
-        .title {
-          font-size: 1.3rem;
-          font-weight: 600;
-        }
+      .title {
+        font-size: 2rem;
+        font-weight: 600;
+        text-align: center;
+      }
+
+      .description {
+        font-size: 1.3rem;
       }
     }
 
