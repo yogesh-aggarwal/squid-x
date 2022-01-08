@@ -143,6 +143,7 @@
           @include Center();
           width: 100%;
           height: 100%;
+          cursor: pointer;
 
           i {
             font-size: 1.4rem;
@@ -192,15 +193,14 @@
           position: absolute;
           top: 0;
           left: 0;
-          border-radius: inherit;
-          background: rgba($color: $s-color, $alpha: 0.8);
-          @include Backdrop();
           width: 100%;
           height: 100%;
           pointer-events: none;
+          border-radius: inherit;
+          background: rgba($color: $s-color, $alpha: 0.8);
           opacity: 0;
-          transition: all 250ms;
           transform: scale(1.1);
+          transition: all 250ms;
 
           @include Center();
 
