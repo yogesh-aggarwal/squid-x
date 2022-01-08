@@ -7,13 +7,6 @@
     <div class="actions">
       <div
         class="action"
-        [ngClass]="{ active: doShowDead }"
-        (click)="doShowDead = !doShowDead"
-      >
-        <i class="las la-skull-crossbones"></i>
-      </div>
-      <div
-        class="action"
         [ngClass]="{ active: viewType == viewType_t.Tile }"
         (click)="viewType = viewType_t.Tile"
       >
@@ -25,6 +18,13 @@
         (click)="viewType = viewType_t.Table"
       >
         <i class="las la-th-list"></i>
+      </div>
+      <div
+        class="action"
+        [ngClass]="{ active: doShowDead }"
+        (click)="doShowDead = !doShowDead"
+      >
+        <i class="las la-skull-crossbones"></i>
       </div>
       <div
         class="action"
@@ -86,7 +86,7 @@
       <ng-container
         *ngFor="let player of getObjectValues(api.players) | orderBy: 'name'"
       >
-        <div #parent class="player" *ngIf="player.isDead == doShowDead">
+        <div #parent class="player" *ngIf="!(player.isDead && !doShowDead)">
           <div class="actions">
             <div class="action" (click)="editPlayer(player.id)">
               <i class="las la-pencil-alt"></i>

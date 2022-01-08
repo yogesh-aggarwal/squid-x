@@ -43,7 +43,7 @@ export class PlayersComponent implements OnInit {
 
   getPlayersLength(obj: Object): number {
     return Object.values(obj).filter(
-      (player) => player.isDead == this.doShowDead
+      (player) => !(player.isDead && !this.doShowDead)
     ).length;
   }
 
