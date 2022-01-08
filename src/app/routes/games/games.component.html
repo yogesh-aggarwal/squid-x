@@ -8,7 +8,10 @@
       </div>
       <div
         class="action"
-        *ngIf="nextGameNo != -1"
+        *ngIf="
+          nextGameNo != -1 &&
+          (dataService.user | async)?.type == UserType.FrontMan
+        "
         (click)="dataService.doShowDeadPlayers.next(false)"
         routerLink="/players"
       >

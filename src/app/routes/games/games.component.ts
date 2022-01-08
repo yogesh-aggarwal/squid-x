@@ -1,6 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { ApiService, Game } from "src/app/services/api.service";
-import { DataService } from "src/app/services/data.service";
+import { DataService, UserType } from "src/app/services/data.service";
 
 @Component({
   selector: "app-games",
@@ -12,6 +12,8 @@ export class GamesComponent implements OnInit {
   doShowFullReport: boolean = false;
   doShowAbout: boolean = false;
   currentGame?: Game;
+
+  UserType = UserType;
 
   constructor(public api: ApiService, public dataService: DataService) {}
 
