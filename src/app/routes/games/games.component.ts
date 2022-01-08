@@ -16,20 +16,8 @@ export class GamesComponent implements OnInit {
   UserType = UserType;
 
   constructor(public api: ApiService, public dataService: DataService) {}
-
-  decideWinner() {
-    this.api.generateReport((report: Report) => {
-      for (let player of report[5].players) {
-        if (!player.isDead) {
-          this.dataService.winner.next(player);
-          break;
-        }
-      }
-    });
-  }
-
   ngOnInit(): void {
-    this.decideWinner();
+    this.dataService.decideWinner();
     this.api.games.subscribe((games) => {
       if (!games.length) return;
       for (const game of games) {
@@ -37,7 +25,7 @@ export class GamesComponent implements OnInit {
           if (this.nextGameNo == -1 && game.gameNo == 6) {
             this.nextGameNo = -1;
             this.api.moveToNextGame(() => {
-              this.decideWinner();
+              this.dataService.decideWinner();
             });
           } else {
             this.nextGameNo = game.gameNo;

@@ -1,5 +1,5 @@
 import { Component, OnInit } from "@angular/core";
-import { Player } from "src/app/services/api.service";
+import { ApiService, Player, Report } from "src/app/services/api.service";
 import { DataService } from "src/app/services/data.service";
 
 @Component({
@@ -9,9 +9,17 @@ import { DataService } from "src/app/services/data.service";
 })
 export class PrizeComponent implements OnInit {
   winner?: Player;
-  constructor(public dataService: DataService) {}
+  constructor(
+    private apiService: ApiService,
+    public dataService: DataService
+  ) {}
 
   ngOnInit(): void {
+    this.dataService.decideWinner();
     this.dataService.winner.subscribe((winner) => (this.winner = winner));
+  }
+
+  calculatePrize() {
+    return 1000;
   }
 }
