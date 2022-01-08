@@ -16,10 +16,9 @@ export class SidebarComponent implements OnInit {
   endpoint: string = "";
 
   routes: Routes[] = [
-    { name: "Dashboard", slug: "" },
+    { name: "Games", slug: "games" },
     { name: "Players", slug: "players" },
     { name: "Workers", slug: "workers" },
-    { name: "Games", slug: "games" },
     { name: "Prize", slug: "prize" },
   ];
 
