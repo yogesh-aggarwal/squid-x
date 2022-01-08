@@ -5,8 +5,8 @@
   grid-template-rows: 5rem auto;
   background: rgb(97, 97, 97);
 
-  * {
-    z-index: 1;
+  app-topbar {
+    z-index: 1e3;
   }
 
   img {
@@ -21,7 +21,6 @@
   }
 
   main {
-    z-index: 1;
     height: calc(100vh - 5rem);
     display: grid;
     grid-template-columns: 25rem auto;

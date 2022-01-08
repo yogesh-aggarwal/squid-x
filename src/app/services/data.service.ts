@@ -8,6 +8,7 @@ import { Player } from "./api.service";
 export class DataService {
   doShowDeadPlayers = new BehaviorSubject<boolean>(false);
   winner = new BehaviorSubject<Player | undefined>(undefined);
+  currentHighlightID = new BehaviorSubject<number>(-1);
 
   constructor() {}
 }

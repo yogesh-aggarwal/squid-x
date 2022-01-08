@@ -4,13 +4,29 @@
   </div>
 
   <div class="tools">
-    <div class="input" (click)="searchInput.focus()">
-      <i class="las la-search"></i>
-      <input
-        type="text"
-        placeholder="Search player, worker, games etc..."
-        #searchInput
-      />
+    <div class="search">
+      <div class="input" (click)="searchInput.focus()">
+        <i class="las la-search"></i>
+        <input
+          type="text"
+          placeholder="Search player, worker, games etc..."
+          #searchInput
+          (input)="searchFromInput($event)"
+        />
+      </div>
+      <div class="results">
+        <div
+          class="result"
+          *ngFor="let result of results"
+          (click)="selectResult(result)"
+          [routerLink]="result.type == 'Player' ? '/players' : '/workers'"
+        >
+          <div class="name">{{ result.title }}</div>
+          <div class="fields">
+            ({{ result.type }}) {{ result.foundFields.join(" | ") }}
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </div>

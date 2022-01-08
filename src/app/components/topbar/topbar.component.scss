@@ -5,6 +5,7 @@
   justify-content: space-between;
   height: 5rem;
   padding: 0 2rem;
+  z-index: 10;
 
   @include Backdrop();
 
@@ -20,9 +21,38 @@
 
   .tools {
     @include CenterV();
+    position: relative;
 
-    .input {
+    .search {
       width: 35rem;
+
+      .results {
+        position: absolute;
+        top: 4rem;
+        left: 0;
+        width: 100%;
+        z-index: 100;
+        overflow-y: auto;
+        max-height: 50vh;
+        border-radius: 0.8rem;
+
+        .result {
+          padding: 0.6rem 3.5rem;
+          cursor: pointer;
+          background: $s-color;
+
+          .name {
+            font-weight: 500;
+            font-size: 1.15rem;
+            margin-bottom: 0.5rem;
+          }
+
+          .fields {
+            font-size: 0.9rem;
+            color: rgba($color: $t-color, $alpha: 0.5);
+          }
+        }
+      }
     }
   }
 }
