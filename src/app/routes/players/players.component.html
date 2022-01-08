@@ -2,7 +2,7 @@
   <div class="top">
     <div class="title">
       Players
-      <span class="tag">{{ api.players.length }}</span>
+      <span class="tag">{{ getObjectKeysLength(api.players) }}</span>
     </div>
     <div class="actions">
       <div
@@ -76,12 +76,15 @@
       </div>
     </div>
     <div class="players" [ngClass]="getClasses()">
-      <div class="player" *ngFor="let player of api.players | orderBy: 'name'">
+      <div
+        class="player"
+        *ngFor="let player of getObjectValues(api.players) | orderBy: 'name'"
+      >
         <div class="actions">
           <div class="action" (click)="editPlayer(player.id)">
             <i class="las la-pencil-alt"></i>
           </div>
-          <div class="action">
+          <div class="action" (click)="deletePlayer(player.id)">
             <i class="las la-trash-alt"></i>
           </div>
           <div class="action" *ngIf="!player.isDead">

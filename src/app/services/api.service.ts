@@ -33,8 +33,8 @@ export type Game = {
   providedIn: "root",
 })
 export class ApiService {
-  players: Player[] = [];
-  workers: Worker[] = [];
+  players: { [key: number]: Player } = {};
+  workers: { [key: number]: Worker } = {};
   games: Game[] = [];
 
   constructor(private apollo: Apollo) {}
@@ -73,8 +73,14 @@ export class ApiService {
         `,
       })
       .valueChanges.subscribe(({ data }) => {
-        this.players = Object.assign([], data["getAllPlayers"]);
-        this.workers = Object.assign([], data["getAllWorkers"]);
+        let players = data["getAllPlayers"];
+        players.forEach((player: Player) => {
+          this.players[player.id] = player;
+        });
+        let workers = data["getAllWorkers"];
+        workers.forEach((worker: Worker) => {
+          this.workers[worker.id] = worker;
+        });
         this.games = Object.assign([], data["getAllGames"]);
       });
   }
@@ -99,7 +105,7 @@ export class ApiService {
           ...player,
           id: data.id,
         } as Player;
-        this.players.push(newPlayer);
+        this.players[newPlayer.id] = newPlayer;
       });
   }
 
@@ -126,9 +132,24 @@ export class ApiService {
         },
       })
       .subscribe(({ data }) => {
-        data = data["updatePlayer"];
-        const newPlayer = data as Player;
-        this.players[data.id - 1] = newPlayer;
+        this.players[data.id] = data["updatePlayer"] as Player;
+      });
+  }
+
+  deletePlayer(id: number) {
+    this.apollo
+      .mutate<any>({
+        mutation: gql`
+          mutation ($id: Int) {
+            deletePlayer(id: $id)
+          }
+        `,
+        variables: {
+          id: id,
+        },
+      })
+      .subscribe(({ data }) => {
+        delete this.players[data.id];
       });
   }
 }

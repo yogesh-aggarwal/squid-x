@@ -36,6 +36,14 @@ export class PlayersComponent implements OnInit {
 
   ngOnInit(): void {}
 
+  getObjectValues(obj: Object): any[] {
+    return Object.values(obj);
+  }
+
+  getObjectKeysLength(obj: Object): number {
+    return Object.keys(obj).length;
+  }
+
   getClasses() {
     return {
       list: this.viewType == ViewType.List,
@@ -59,11 +67,9 @@ export class PlayersComponent implements OnInit {
       return;
     this.isUpdating = true;
     this.currentEditingPlayerID = id;
-    const playerMeta = this.api.players[id - 1];
-
+    const playerMeta = this.api.players[id];
+    console.log(this.api.players);
     const playerDob = new Date(playerMeta.dob);
-    console.log(playerDob);
-
     (this.name.nativeElement as any).value = playerMeta.name;
     (this.occupation.nativeElement as any).value = playerMeta.occupation;
     (this.debt.nativeElement as any).value = playerMeta.debt;
@@ -135,5 +141,9 @@ export class PlayersComponent implements OnInit {
     (this.dob.nativeElement as any).value = "";
     this.isCreatingPlayer = false;
     this.isUpdating = false;
+  }
+
+  deletePlayer(id: number) {
+    this.api.deletePlayer(id);
   }
 }
