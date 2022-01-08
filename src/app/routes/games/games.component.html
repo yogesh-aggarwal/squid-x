@@ -9,7 +9,7 @@
       <div
         class="action"
         *ngIf="nextGameNo != -1"
-        (click)="playersService.doShowDead.next(false)"
+        (click)="dataService.doShowDeadPlayers.next(false)"
         routerLink="/players"
       >
         <i class="las la-forward"></i>

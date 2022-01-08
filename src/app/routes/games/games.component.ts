@@ -1,6 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { ApiService } from "src/app/services/api.service";
-import { PlayersService } from "src/app/services/players.service";
+import { DataService } from "src/app/services/data.service";
 
 @Component({
   selector: "app-games",
@@ -10,7 +10,7 @@ import { PlayersService } from "src/app/services/players.service";
 export class GamesComponent implements OnInit {
   nextGameNo: number = -1;
 
-  constructor(public api: ApiService, public playersService: PlayersService) {}
+  constructor(public api: ApiService, public dataService: DataService) {}
 
   ngOnInit(): void {
     this.api.games.subscribe((games) => {
