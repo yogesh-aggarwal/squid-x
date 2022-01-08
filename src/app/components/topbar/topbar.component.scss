@@ -20,5 +20,9 @@
 
   .tools {
     @include CenterV();
+
+    .input {
+      width: 35rem;
+    }
   }
 }
