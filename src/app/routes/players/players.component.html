@@ -7,7 +7,7 @@
     <div class="actions">
       <div class="action" style="margin-right: 2rem" routerLink="/games">
         <i class="las la-hand-scissors"></i>
-        <span>Select Next Game</span>
+        <span>Next Game</span>
       </div>
       <div
         class="action"
@@ -121,7 +121,12 @@
             <div class="debt">${{ player.debt }}</div>
             <div class="games-passed">{{ player.atGameNumber }} Games</div>
           </div>
-          <div class="is-dead" (click)="eliminatePlayer(parent, player.id)">
+          <div
+            class="is-dead"
+            [ngClass]="{ dead: player.isDead }"
+            (click)="eliminatePlayer(parent, player.id)"
+          >
+            <span *ngIf="!player.isDead">Eliminate</span>
             <i class="las la-skull-crossbones" *ngIf="player.isDead"></i>
           </div>
           <div class="actions">
