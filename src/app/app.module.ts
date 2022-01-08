@@ -13,6 +13,7 @@ import { WorkersComponent } from "./routes/workers/workers.component";
 import { GraphQLModule } from "./graphql.module";
 import { OrderModule } from "ngx-order-pipe";
 import { ModalComponent } from "./components/modal/modal.component";
+import { LoginComponent } from './routes/login/login.component';
 
 @NgModule({
   declarations: [
@@ -24,6 +25,7 @@ import { ModalComponent } from "./components/modal/modal.component";
     TopbarComponent,
     WorkersComponent,
     ModalComponent,
+    LoginComponent,
   ],
   imports: [
     BrowserModule,
