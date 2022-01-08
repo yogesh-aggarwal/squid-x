@@ -1,6 +1,38 @@
 <div class="screen">
   <div class="top">
     <div class="title">Games</div>
+    <div class="actions">
+      <div class="action" *ngIf="nextGameNo == -1">
+        <i class="las la-chart-pie"></i>
+        <span>Results</span>
+      </div>
+      <div class="action" *ngIf="nextGameNo != -1">
+        <i class="las la-forward"></i>
+        <span>Start Next Game</span>
+      </div>
+    </div>
   </div>
-  <div class="content">lorem4000</div>
+  <div class="content">
+    <div class="games">
+      <div
+        class="game"
+        *ngFor="let game of api.games | async | orderBy: 'gameNo'"
+        [ngClass]="{
+          covered: game.hasCovered,
+          current: game.gameNo == nextGameNo
+        }"
+      >
+        <div class="covered-check" *ngIf="game.hasCovered">
+          <i class="las la-check"></i>
+        </div>
+        <div class="current-check" *ngIf="game.gameNo == nextGameNo">
+          <i class="las la-feather-alt"></i>
+        </div>
+        <div class="name">
+          {{ game.name }}
+        </div>
+        <div class="description">{{ game.description.slice(0, 400) }}...</div>
+      </div>
+    </div>
+  </div>
 </div>

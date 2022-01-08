@@ -1,5 +1,6 @@
 import { Injectable } from "@angular/core";
 import { Apollo, gql } from "apollo-angular";
+import { BehaviorSubject } from "rxjs";
 
 export type Player = {
   id: number;
@@ -35,7 +36,7 @@ export type Game = {
 export class ApiService {
   players: { [key: number]: Player } = {};
   workers: { [key: number]: Worker } = {};
-  games: Game[] = [];
+  games = new BehaviorSubject<Game[]>([]);
 
   constructor(private apollo: Apollo) {}
 
@@ -83,7 +84,7 @@ export class ApiService {
           worker = (({ __typename, ...o }) => o)(worker as any);
           this.workers[worker.id] = worker;
         });
-        this.games = Object.assign([], data["getAllGames"]);
+        this.games.next(Object.assign([], data["getAllGames"]));
       });
   }
 

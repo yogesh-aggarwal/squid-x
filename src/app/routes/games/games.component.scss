@@ -1,0 +1,52 @@
+@import "../../../common";
+
+.screen .content {
+  padding: 0 2rem;
+
+  .games {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    grid-gap: 2rem;
+
+    .game {
+      padding: 2rem;
+      border-radius: 2rem;
+      background: rgba($color: $s-color, $alpha: 0.5);
+      position: relative;
+
+      .name {
+        font-size: 1.5rem;
+        font-weight: 500;
+        margin-bottom: 1.5rem;
+      }
+
+      .description {
+        text-overflow: ellipsis;
+      }
+
+      .covered-check,
+      .current-check {
+        position: absolute;
+        top: 2.3rem;
+        right: 2.3rem;
+
+        i {
+          font-size: 1.5rem;
+        }
+      }
+
+      &.covered {
+        opacity: 0.5;
+
+        .name {
+          text-decoration: line-through;
+        }
+      }
+
+      &.current {
+        border: 5px solid rgba($color: $p-color, $alpha: 0.4);
+      }
+    }
+  }
+}
