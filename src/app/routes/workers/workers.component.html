@@ -1,8 +1,124 @@
 <div class="screen">
   <div class="top">
-    <div class="title">Workers</div>
+    <div class="title">
+      Workers
+      <span class="tag">{{ getWorkersLength(api.workers) }}</span>
+    </div>
+    <div class="actions">
+      <div
+        class="action"
+        style="margin-right: 2rem"
+        (click)="nextGame()"
+        routerLink="/games"
+      >
+        <i class="las la-hand-scissors"></i>
+        <span>Next Game</span>
+      </div>
+      <div
+        class="action"
+        [ngClass]="{ active: viewType == viewType_t.Tile }"
+        (click)="viewType = viewType_t.Tile"
+      >
+        <i class="las la-stream"></i>
+      </div>
+      <div
+        class="action"
+        [ngClass]="{ active: viewType == viewType_t.Table }"
+        (click)="viewType = viewType_t.Table"
+      >
+        <i class="las la-th-list"></i>
+      </div>
+      <div
+        class="action"
+        [ngClass]="{ active: true }"
+        (click)="
+          isCreatingWorker ? closeAddScreen() : (isCreatingWorker = true)
+        "
+      >
+        <i class="las la-times" *ngIf="isCreatingWorker"></i>
+        <i class="las la-plus" *ngIf="!isCreatingWorker"></i>
+      </div>
+    </div>
   </div>
-  <div class="content">
-    lorem4000
+  <div class="content" [ngClass]="{ 'adding-worker': isCreatingWorker }">
+    <div class="add-worker" [ngClass]="{ active: isCreatingWorker }">
+      <div class="heading" *ngIf="isUpdating">Update worker</div>
+      <div class="heading" *ngIf="!isUpdating">Add new worker</div>
+      <div class="form">
+        <div class="c2">
+          <div class="input" (click)="name.focus()">
+            <i class="las la-signature"></i>
+            <input type="text" placeholder="Name" #name />
+          </div>
+          <div class="input" (click)="occupation.focus()">
+            <i class="las la-user-md"></i>
+            <input type="text" placeholder="Occupation" #occupation />
+          </div>
+        </div>
+        <div class="c2">
+          <div class="input" (click)="debt.focus()">
+            <i class="las la-dollar-sign"></i>
+            <input type="number" placeholder="Debt" #debt />
+          </div>
+          <div class="input" (click)="dob.focus()">
+            <i class="las la-calendar-alt"></i>
+            <input type="date" placeholder="Address" #dob />
+          </div>
+        </div>
+        <div class="input" (click)="address.focus()">
+          <i class="las la-igloo"></i>
+          <input type="text" placeholder="Address" #address />
+        </div>
+      </div>
+      <div class="actions">
+        <div class="action" (click)="closeAddScreen()">Cancel</div>
+        <div class="action primary" (click)="updateWorker()" *ngIf="isUpdating">
+          Update
+        </div>
+        <div
+          class="action primary"
+          (click)="createWorker()"
+          *ngIf="!isUpdating"
+        >
+          Add
+        </div>
+      </div>
+    </div>
+    <div class="table-header" *ngIf="viewType == viewType_t.Table">
+      <div class="g1">Name</div>
+      <div class="g2">
+        <div class="g3">Date of Birth</div>
+        <div class="g3">Occupation</div>
+      </div>
+      <div class="g4">Eliminated</div>
+      <div class="g5">Actions</div>
+    </div>
+    <div class="workers" [ngClass]="getClasses()">
+      <ng-container
+        *ngFor="let worker of getObjectValues(api.workers) | orderBy: 'name'"
+      >
+        <div #parent class="worker">
+          <div class="name" [ngClass]="{ dead: worker.isDead }">
+            {{ worker.name }}
+          </div>
+          <div class="info-g1">
+            <div class="dob">{{ worker.dob | date: "dd/MM/yyyy" }}</div>
+            <div class="occupation">{{ worker.occupation }}</div>
+          </div>
+          <div class="info-g2">
+            <div class="debt">${{ worker.debt }}</div>
+            <div class="games-passed">{{ worker.atGameNumber }} Games</div>
+          </div>
+          <div class="actions">
+            <div class="action" (click)="editWorker(worker.id)">
+              <i class="las la-pencil-alt"></i>
+            </div>
+            <div class="action" (click)="deleteWorker(parent, worker.id)">
+              <i class="las la-trash-alt"></i>
+            </div>
+          </div>
+        </div>
+      </ng-container>
+    </div>
   </div>
 </div>

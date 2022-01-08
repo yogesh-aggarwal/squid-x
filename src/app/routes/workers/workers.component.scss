@@ -1,0 +1,286 @@
+@import "../../../common";
+
+.screen .content {
+  &.adding-worker {
+    transition: all 0ms;
+    padding-right: 2.5rem;
+    overflow: hidden;
+    padding: 0 2rem;
+  }
+
+  .general-info {
+    @include CenterV();
+    margin-bottom: 2rem;
+
+    span {
+      &.total-workers {
+        font-size: 1.5rem;
+        font-weight: 600;
+      }
+    }
+  }
+
+  .add-worker {
+    height: 0;
+    opacity: 0;
+    pointer-events: none;
+    transform: scale(0.9) translateY(25%);
+    position: relative;
+
+    &.active {
+      height: 100%;
+      opacity: 1;
+      pointer-events: all;
+      transform: scale(1);
+    }
+
+    .heading {
+      font-size: 1.4rem;
+      text-transform: uppercase;
+      font-weight: 500;
+      margin-bottom: 3rem;
+      text-align: center;
+    }
+
+    .form {
+      .c2 {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-gap: 1rem;
+        margin-bottom: 1rem;
+      }
+    }
+
+    .actions {
+      @include CenterV();
+      justify-content: flex-end;
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 100%;
+      height: 6rem;
+
+      .action {
+        border-radius: 0.5rem;
+        padding: 0.5rem 2.5rem;
+        cursor: pointer;
+
+        &.primary {
+          padding: 0.5rem 1.3rem;
+          background: $p-color;
+        }
+      }
+    }
+  }
+
+  $table-layout: 0.5fr 1.5fr 1.5fr 0.5fr 0.5fr;
+
+  .table-header {
+    display: grid;
+    align-items: center;
+    grid-template-columns: $table-layout;
+    height: 4rem;
+    border-bottom: 2px solid rgba($p-color, 0.2);
+    padding: 0 2rem;
+
+    .g1,
+    .g2 {
+      display: grid;
+      align-items: center;
+      grid-template-columns: 1fr 1fr;
+    }
+
+    * {
+      text-align: center;
+      font-weight: 600;
+      font-size: 1.1rem;
+    }
+  }
+
+  .workers {
+    * {
+      transition: all 0ms;
+    }
+
+    .worker {
+      transition: all 0ms;
+      position: relative;
+    }
+
+    &.table {
+      max-height: calc(100% - 4rem - 2px);
+      overflow-y: scroll;
+      padding: 0 2rem;
+
+      .worker {
+        display: grid;
+        align-items: center;
+        grid-template-columns: $table-layout;
+        padding: 1rem 0;
+        overflow: hidden;
+
+        .name {
+          font-weight: 500;
+
+          &.dead {
+            text-decoration: line-through;
+            color: rgba($color: $t-color, $alpha: 0.5);
+          }
+        }
+
+        .info-g1,
+        .info-g2 {
+          display: grid;
+          align-items: center;
+          grid-template-columns: 1fr 1fr;
+
+          * {
+            text-align: center;
+          }
+        }
+
+        .is-dead {
+          @include Center();
+          width: 100%;
+          height: 100%;
+          cursor: pointer;
+          background: rgba($color: $s-color, $alpha: 0.5);
+          border-radius: 0.5rem;
+
+          &.dead {
+            background: transparent;
+          }
+
+          i {
+            font-size: 1.4rem;
+          }
+
+          span {
+            font-size: 0.9rem;
+          }
+        }
+
+        .actions {
+          @include Center();
+
+          .action {
+            @include Center();
+            width: 2.5rem;
+            height: 2.5rem;
+            border-radius: 0.5rem;
+            cursor: pointer;
+            margin: 0 0.25rem;
+
+            &:hover {
+              background: $s-color;
+            }
+
+            &.dead {
+              display: none;
+            }
+
+            i {
+              font-size: 1.2rem;
+            }
+          }
+        }
+      }
+    }
+
+    &.tile {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
+      grid-gap: 1.5rem;
+      padding: 0 2rem;
+
+      .worker {
+        @include Backdrop();
+        border-radius: 1.5rem;
+        background: rgba($color: $s-color, $alpha: 0.4);
+        padding: 1.5rem 1.8rem;
+
+        .actions {
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          pointer-events: none;
+          border-radius: inherit;
+          background: rgba($color: $s-color, $alpha: 0.8);
+          opacity: 0;
+          transform: scale(1.1);
+          transition: all 250ms;
+
+          @include Center();
+
+          .action {
+            @include Center();
+            width: 3.5rem;
+            height: 3.5rem;
+            background: $s-color;
+            border-radius: 0.5rem;
+            cursor: pointer;
+            margin: 0 0.25rem;
+
+            i {
+              font-size: 1.6rem;
+            }
+          }
+        }
+
+        &:hover {
+          transition: all 250ms;
+          transform: scale(0.97);
+
+          .actions {
+            opacity: 1;
+            pointer-events: all;
+            transform: scale(1);
+          }
+        }
+
+        .is-dead {
+          display: none;
+        }
+
+        .name {
+          font-size: 1.8rem;
+          font-size: 600;
+          margin-bottom: 0.5rem;
+
+          &.dead {
+            text-decoration: line-through;
+            color: rgba($color: $t-color, $alpha: 0.4);
+          }
+        }
+
+        .info-g1 {
+          @include CenterV();
+          margin-bottom: 1.8rem;
+          justify-content: space-between;
+
+          .dob,
+          .occupation {
+            color: rgba($color: $t-color, $alpha: 0.5);
+          }
+        }
+
+        .info-g2 {
+          @include CenterV();
+          justify-content: space-between;
+
+          .debt,
+          .games-passed {
+            font-weight: 500;
+            color: rgba($color: $t-color, $alpha: 0.75);
+          }
+
+          .games-passed {
+            color: rgba($color: $t-color, $alpha: 0.5);
+          }
+        }
+      }
+    }
+  }
+}

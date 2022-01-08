@@ -158,6 +158,76 @@ export class ApiService {
       });
   }
 
+  createWorker(worker: Partial<Worker>) {
+    this.apollo
+      .mutate<any>({
+        mutation: gql`
+          mutation ($worker: WorkerCreateInput) {
+            createWorker(worker: $worker) {
+              id
+            }
+          }
+        `,
+        variables: {
+          worker: worker,
+        },
+      })
+      .subscribe(({ data }) => {
+        data = data["createWorker"];
+        const newWorker = {
+          ...worker,
+          id: data.id,
+        } as Worker;
+        this.workers[newWorker.id] = newWorker;
+      });
+  }
+
+  updateWorker(id: number, worker: Partial<Worker>) {
+    delete worker.id;
+    this.apollo
+      .mutate<any>({
+        mutation: gql`
+          mutation ($id: Int, $worker: WorkerUpdateInput) {
+            updateWorker(id: $id, worker: $worker) {
+              id
+              name
+              dob
+              occupation
+              address
+              debt
+              atGameNumber
+              isDead
+            }
+          }
+        `,
+        variables: {
+          id: id,
+          worker: worker,
+        },
+      })
+      .subscribe(({ data }) => {
+        data = data["updateWorker"] as Worker;
+        this.workers[data.id] = data;
+      });
+  }
+
+  deleteWorker(id: number) {
+    this.apollo
+      .mutate<any>({
+        mutation: gql`
+          mutation ($id: Int) {
+            deleteWorker(id: $id)
+          }
+        `,
+        variables: {
+          id: id,
+        },
+      })
+      .subscribe((_) => {
+        delete this.workers[id];
+      });
+  }
+
   moveToNextGame() {
     this.apollo
       .mutate<any>({
