@@ -97,7 +97,13 @@
       <ng-container
         *ngFor="let worker of getObjectValues(api.workers) | orderBy: 'name'"
       >
-        <div #parent class="worker">
+        <div
+          #parent
+          class="worker"
+          [ngClass]="{
+            highlight: worker.id == (dataService.currentHighlightID | async)
+          }"
+        >
           <div class="name">{{ worker.name }}</div>
           <div class="info-g1">
             <div class="dob">{{ worker.dob | date: "dd/MM/yyyy" }}</div>

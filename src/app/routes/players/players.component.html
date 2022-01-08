@@ -133,6 +133,9 @@
         <div
           #parent
           class="player"
+          [ngClass]="{
+            highlight: player.id == (dataService.currentHighlightID | async)
+          }"
           *ngIf="!(player.isDead && !dataService.doShowDeadPlayers.value)"
         >
           <div class="name" [ngClass]="{ dead: player.isDead }">

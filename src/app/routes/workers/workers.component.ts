@@ -1,5 +1,6 @@
 import { Component, ElementRef, OnInit, ViewChild } from "@angular/core";
 import { ApiService, Worker } from "src/app/services/api.service";
+import { DataService } from "src/app/services/data.service";
 
 enum ViewType {
   Tile = "tile",
@@ -31,9 +32,13 @@ export class WorkersComponent implements OnInit {
 
   isUpdating: boolean = false;
 
-  constructor(public api: ApiService) {}
+  constructor(public api: ApiService, public dataService: DataService) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    setTimeout(() => {
+      this.dataService.currentHighlightID.next(-1);
+    }, 2000);
+  }
 
   getObjectValues(obj: Object): any[] {
     return Object.values(obj);
