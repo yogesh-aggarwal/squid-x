@@ -18,6 +18,7 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {}
 
   login() {
+    if (!this.username?.nativeElement.value.trim().length) return;
     this.dataService.user.next({
       id: Date.now(),
       type: this.username?.nativeElement.value
