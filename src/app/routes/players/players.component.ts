@@ -23,7 +23,7 @@ export class PlayersComponent implements OnInit {
   @ViewChild("address")
   address?: ElementRef<HTMLElement>;
 
-  viewType: ViewType = ViewType.Tile;
+  viewType: ViewType = ViewType.Table;
   viewType_t = ViewType;
   isCreatingPlayer: boolean = false;
 
@@ -151,6 +151,7 @@ export class PlayersComponent implements OnInit {
   }
 
   eliminatePlayer($parent: HTMLDivElement, id: number) {
+    console.log(id);
     $parent.style.opacity = ".2";
     setTimeout(() => {
       this.api.updatePlayer(id, {
