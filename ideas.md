@@ -6,5 +6,4 @@
 - Stats for every game
 - Prize
 - Search
-- Dashboard
 - Prize Payment
