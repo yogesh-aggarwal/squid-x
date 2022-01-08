@@ -2,7 +2,6 @@ import { Component, ElementRef, OnInit, ViewChild } from "@angular/core";
 import { ApiService, Player } from "src/app/services/api.service";
 
 enum ViewType {
-  List = "list",
   Tile = "tile",
   Table = "table",
 }
@@ -24,7 +23,7 @@ export class PlayersComponent implements OnInit {
   @ViewChild("address")
   address?: ElementRef<HTMLElement>;
 
-  viewType: ViewType = ViewType.Table;
+  viewType: ViewType = ViewType.Tile;
   viewType_t = ViewType;
   isCreatingPlayer: boolean = false;
 
@@ -49,7 +48,6 @@ export class PlayersComponent implements OnInit {
 
   getClasses() {
     return {
-      list: this.viewType == ViewType.List,
       tile: this.viewType == ViewType.Tile,
       table: this.viewType == ViewType.Table,
     };
