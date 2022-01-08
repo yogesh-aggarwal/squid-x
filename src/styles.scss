@@ -106,3 +106,74 @@ body {
     width: 100%;
   }
 }
+
+.dropdown {
+  position: relative;
+  background: rgba($s-color, 0.7);
+  border-radius: 0.8rem;
+  backdrop-filter: blur(10px);
+  height: 3.25rem;
+  cursor: pointer;
+
+  margin-top: 1rem;
+
+  &:hover {
+    .drop-content {
+      opacity: 1;
+    }
+  }
+
+  .main {
+    @include CenterV();
+    height: 3.25rem;
+
+    .name {
+      margin-left: 1rem;
+      margin-top: -2px;
+    }
+
+    i {
+      margin-left: 1rem;
+      font-size: 1.1rem;
+    }
+
+    i.indicate {
+      position: absolute;
+      top: 1rem;
+      right: 1.5rem;
+    }
+  }
+
+  &:hover {
+    height: unset;
+
+    i.indicate {
+      transform: rotate(-180deg);
+    }
+
+    .drop-content {
+      opacity: 1;
+      pointer-events: all;
+      height: auto;
+    }
+  }
+
+  .drop-content {
+    opacity: 0;
+    pointer-events: none;
+    height: 0;
+    transition: all 0ms;
+
+    .item {
+      padding: 0.6rem 1.5rem;
+
+      &:first-of-type {
+        padding-top: 0.8rem;
+      }
+
+      &:last-of-type {
+        padding-bottom: 0.8rem;
+      }
+    }
+  }
+}

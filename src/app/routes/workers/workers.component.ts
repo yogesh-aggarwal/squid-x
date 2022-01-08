@@ -23,7 +23,7 @@ export class WorkersComponent implements OnInit {
 
   viewType: ViewType = ViewType.Table;
   viewType_t = ViewType;
-  isCreatingWorker: boolean = false;
+  isCreatingWorker: boolean = true;
 
   currentEditingWorkerID: number = -1;
 
@@ -53,13 +53,7 @@ export class WorkersComponent implements OnInit {
   }
 
   editWorker(id: number) {
-    if (
-      !this.name ||
-      !this.occupation ||
-      !this.dob ||
-      !this.address
-    )
-      return;
+    if (!this.name || !this.occupation || !this.dob || !this.address) return;
     this.isUpdating = true;
     this.currentEditingWorkerID = id;
     const workerMeta = this.api.workers[id];
@@ -76,13 +70,7 @@ export class WorkersComponent implements OnInit {
   }
 
   updateWorker() {
-    if (
-      !this.name ||
-      !this.occupation ||
-      !this.dob ||
-      !this.address
-    )
-      return;
+    if (!this.name || !this.occupation || !this.dob || !this.address) return;
     let newWorker: Partial<Worker> = {
       name: (this.name.nativeElement as any).value,
       occupation: (this.occupation.nativeElement as any).value,
@@ -94,13 +82,7 @@ export class WorkersComponent implements OnInit {
   }
 
   createWorker() {
-    if (
-      !this.name ||
-      !this.occupation ||
-      !this.dob ||
-      !this.address
-    )
-      return;
+    if (!this.name || !this.occupation || !this.dob || !this.address) return;
     this.api.createWorker({
       name: (this.name.nativeElement as any).value,
       occupation: (this.occupation.nativeElement as any).value,
@@ -111,13 +93,7 @@ export class WorkersComponent implements OnInit {
   }
 
   closeAddScreen() {
-    if (
-      !this.name ||
-      !this.occupation ||
-      !this.dob ||
-      !this.address
-    )
-      return;
+    if (!this.name || !this.occupation || !this.dob || !this.address) return;
     (this.name.nativeElement as any).value = "";
     (this.occupation.nativeElement as any).value = "";
     (this.address.nativeElement as any).value = "";
